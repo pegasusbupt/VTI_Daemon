@@ -30,10 +30,13 @@ public class FeedReader {
 	 */
 	public static void writeFile(String file, Collection<String> lines){
 		try{
-			FileWriter fstream = new FileWriter(file,true);
-			BufferedWriter out = new BufferedWriter(fstream);
-			for(String line: lines)
+			BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+			System.out.println(file);
+			for(String line: lines){
+				System.out.println(line);
 				out.write(line);
+			}
+			out.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -55,7 +58,19 @@ public class FeedReader {
 	}
 	
     public static void main(String[] args) {
-        boolean ok = false;
+    	try{
+    		  // Create file 
+    		  FileWriter fstream = new FileWriter("output.txt");
+    		  BufferedWriter out = new BufferedWriter(fstream);
+    		  out.write("Hello Java");
+    		  //Close the output stream
+    		  out.close();
+    		  }catch (Exception e){//Catch exception if any
+    		  System.err.println("Error: " + e.getMessage());
+    		  }
+    	
+    /*
+    	boolean ok = false;
         if (args.length==1) {
             try {
                 URL feedUrl = new URL(args[0]);
@@ -74,7 +89,7 @@ public class FeedReader {
                 for(SyndEntryImpl entry: entries){
                 	String link=entry.getLink();
                 	String id=link.substring(link.lastIndexOf('=')+1);
-                    if(old_alertIds.contains(id)){ //is a new alert
+                    if(!old_alertIds.contains(id)){ //is a new alert
                     	System.out.println(entry.getDescription().getValue());
                     	alertIds.add(id);
                     }
@@ -97,6 +112,7 @@ public class FeedReader {
             System.out.println("The first parameter must be the URL of the feed to read.");
             System.out.println();
         }
+        */
     }
  
 }
