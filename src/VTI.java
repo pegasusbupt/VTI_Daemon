@@ -1,8 +1,9 @@
 import java.io.IOException;
 import java.util.HashMap;
 
+import account.VTIAccount;
+
 import twitter4j.TwitterException;
-import core.VTIAccount;
 
 
 public class VTI {

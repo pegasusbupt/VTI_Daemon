@@ -1,4 +1,4 @@
-package core;
+package account;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
@@ -37,9 +37,9 @@ public class VTIAccount implements Runnable {
 	public final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
 	public final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
 
-	private Twitter twitter;
-	private User user;
-	private LinkedHashSet<String> seen_statuses;
+	protected Twitter twitter;
+	protected User user;
+	protected LinkedHashSet<String> seen_statuses;
 
 	public static Twitter authorize(String screen_name) throws IOException,
 			TwitterException {
