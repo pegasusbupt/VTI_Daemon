@@ -2,13 +2,17 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import twitter4j.TwitterException;
+import utils.FeedReader;
 import account.TrainRouteVTIAccount;
 
 
 public class VTI {
 
-	public static void main(String[] args) throws IOException,
-			IllegalStateException, TwitterException, InterruptedException {
+	public static void main(String[] args){
+		new VTI().run(args);
+	}
+	
+	public void run(String[] args){
 		// default running time equals to minutes
 		long run_time = 1000 * 10;
 		if (args.length > 0) {
@@ -20,16 +24,10 @@ public class VTI {
 			}
 		}
         
-		/*
-		VTIAccount ins=new VTIAccount("Sol_Ma");
-		for(int i=0;i<500;i++)
-			ins.getTwitter().getMentions();
-		*/
-		
 		HashMap<String, Thread> vti = new HashMap<String, Thread>();
+		addTrainRoutes(vti);
 		//vti.put("simpleasure", new Thread(new VTIAccount("simpleasure")) );
 		//vti.put("VTIDEMOROBOT", new Thread(new VTIAccount("VTIDEMOROBOT")) );
-		vti.put("VTI_BlueLine", new Thread(new TrainRouteVTIAccount("VTI_BlueLine")) );
 		//vti.put("Sol_Ma", new Thread(new VTIAccount("Sol_Ma")) );
 
 		// for each account, start monitoring statuses
@@ -38,7 +36,11 @@ public class VTI {
 			account.start();
 	
 		while(System.currentTimeMillis()-start_time<run_time){
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// for each account, stop monitoring statuses
@@ -51,5 +53,15 @@ public class VTI {
 		//System.exit(0);
        
 	}
+	
+	public void addTrainRoutes(HashMap<String, Thread> vti){
+		try {
+			for(String route: FeedReader.route_id.keySet())
+				vti.put(route, new Thread(new TrainRouteVTIAccount(route)) );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 }
