@@ -1,67 +1,72 @@
 package account;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.List;
+import utils.*;
 
-import twitter4j.DirectMessage;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-public class TrainRouteVTIAccount extends VTIAccount{
+public class TrainRouteVTIAccount extends VTIAccount {
 
 	public TrainRouteVTIAccount(String screen_name) throws IOException {
 		super(screen_name);
 	}
 
 	public void run() {
-		PrintWriter logOut=null;
+		BufferedWriter logOut = null;
+		Calendar cal = Calendar.getInstance();
 		try {
-			logOut = new PrintWriter(new FileWriter("logs/"+twitter.getScreenName()+".txt"));
-		} catch (IllegalStateException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (TwitterException e1) {
-			e1.printStackTrace();
+			logOut = new BufferedWriter(new FileWriter("logs/"
+					+ twitter.getScreenName() + ".txt", true));
+		} catch (IllegalStateException e2) {
+			e2.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		} catch (TwitterException e2) {
+			e2.printStackTrace();
 		}
-		
 		while (true) {
-			List<Status> statuses;
-			List<DirectMessage> dms;
-						
+			List<String> statuses;
+			
 			try {
-				statuses = twitter.getMentions();
-				dms = twitter.getDirectMessages();
-						
-				logOut.println("Showing latest @" + user.getScreenName()
-						+ "'s mentions.");
-				for (Status status : statuses)
-					if (!seen_statuses.contains(String.valueOf(status.getId()))) {
-						seen_statuses.add(String.valueOf(status.getId()));
-						logOut.println("@"
-								+ status.getUser().getScreenName() + " - "
-								+ status.getText());
-						// remove @screen_name (regardless letter cases) within the status
-						String new_status=status.getText().replaceAll(
-								"@" + user.getScreenName(), "");
-						new_status=new_status.replaceAll("@" + user.getScreenName().toLowerCase(), "");
-						
-						twitter.updateStatus(new_status);
+				statuses = FeedReader
+						.retrieveFeeds("http://www.transitchicago.com/rss/railalertsrss.aspx?RouteId="+FeedReader.route_id.get(twitter.getScreenName().toLowerCase()));
+				// dms = twitter.getDirectMessages();
+				if (statuses.size() > 0) {
+					logOut.write(DateFormat.getDateTimeInstance(
+							DateFormat.FULL, DateFormat.MEDIUM).format(
+							cal.getTime()));
+					logOut.newLine();
+					for (String status : statuses) {
+						logOut.write(status);
+						logOut.newLine();
+						if (status.length() > 140)
+							twitter.updateStatus(StringProcess.messageShorten(status));
 
 					}
-				
+					logOut.newLine();
+				}
 			} catch (TwitterException e) {
 				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		
+
 			try {
-				logOut.println();
 				Thread.sleep(1000); // check the received tweets every 1 sec
 			} catch (InterruptedException e) {
-				//e.printStackTrace();
-				logOut.close();
+				try {
+					logOut.close();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
 				break;
 			}
 

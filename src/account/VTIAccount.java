@@ -13,12 +13,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 
-import twitter4j.DirectMessage;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -167,11 +165,11 @@ public class VTIAccount implements Runnable {
 		
 		while (true) {
 			List<Status> statuses;
-			List<DirectMessage> dms;
+			//List<DirectMessage> dms;
 						
 			try {
 				statuses = twitter.getMentions();
-				dms = twitter.getDirectMessages();
+				//dms = twitter.getDirectMessages();
 						
 				logOut.println("Showing latest @" + user.getScreenName()
 						+ "'s mentions.");

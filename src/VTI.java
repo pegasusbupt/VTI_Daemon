@@ -1,9 +1,8 @@
 import java.io.IOException;
 import java.util.HashMap;
 
-import account.VTIAccount;
-
 import twitter4j.TwitterException;
+import account.TrainRouteVTIAccount;
 
 
 public class VTI {
@@ -30,7 +29,7 @@ public class VTI {
 		HashMap<String, Thread> vti = new HashMap<String, Thread>();
 		//vti.put("simpleasure", new Thread(new VTIAccount("simpleasure")) );
 		//vti.put("VTIDEMOROBOT", new Thread(new VTIAccount("VTIDEMOROBOT")) );
-		vti.put("VTI_brownLine", new Thread(new VTIAccount("VTI_brownline")) );
+		vti.put("VTI_BlueLine", new Thread(new TrainRouteVTIAccount("VTI_BlueLine")) );
 		//vti.put("Sol_Ma", new Thread(new VTIAccount("Sol_Ma")) );
 
 		// for each account, start monitoring statuses
