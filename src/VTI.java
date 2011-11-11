@@ -14,7 +14,7 @@ public class VTI {
 	
 	public void run(String[] args){
 		// default running time equals to minutes
-		long run_time = 1000 * 10;
+		long run_time = 1000 * 3;
 		if (args.length > 0) {
 			try {
 				run_time = Long.parseLong(args[0]) * 1000;
