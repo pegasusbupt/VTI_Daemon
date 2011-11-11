@@ -41,7 +41,8 @@ public class VTIAccount implements Runnable {
 
 	public static Twitter authorize(String screen_name) throws IOException,
 			TwitterException {
-		String credentials = "credentials/" + screen_name;
+		//screen name is case-insensitive
+		String credentials = "credentials/" + screen_name.toLowerCase();
 		File file = new File(credentials);
 		Properties prop = new Properties();
 		Twitter twitter = null;

@@ -36,7 +36,7 @@ public class FeedReader {
 		route_id.put("vti_blueline", "310");
 		//route_id.put("vti_pinkline", "311");
 		//route_id.put("vti_greenline", "312");
-		//route_id.put("vti_brownline", "313");
+		route_id.put("vti_brownline", "313");
 		//route_id.put("vti_orangeline", "314");
 		//route_id.put("vti_purpleexpressline", "323");
 	}
