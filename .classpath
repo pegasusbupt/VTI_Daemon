@@ -13,5 +13,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/usr/lib/jvm/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/postgresql-9.1-901.jdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
