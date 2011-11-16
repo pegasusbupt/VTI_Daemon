@@ -30,14 +30,14 @@ import com.sun.syndication.io.XmlReader;
 public class FeedReader {
 	public final static HashMap<String, String> route_id=new HashMap<String, String>();
 	static{
-		route_id.put("vti_redline", "307");
-		route_id.put("vti_purpleline", "308");
-		route_id.put("vti_yellowline", "309");
-		route_id.put("vti_blueline", "310");
-		route_id.put("vti_pinkline", "311");
+		//route_id.put("vti_redline", "307");
+		//route_id.put("vti_purpleline", "308");
+		//route_id.put("vti_yellowline", "309");
+		//route_id.put("vti_blueline", "310");
+		//route_id.put("vti_pinkline", "311");
 		//route_id.put("vti_greenline", "312");
 		route_id.put("vti_brownline", "313");
-		route_id.put("vti_orangeline", "314");
+		//route_id.put("vti_orangeline", "314");
 		//route_id.put("vti_purpleexpressline", "323");
 	}
 	

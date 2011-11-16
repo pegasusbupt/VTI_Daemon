@@ -4,6 +4,7 @@ import java.util.HashMap;
 import twitter4j.TwitterException;
 import utils.FeedReader;
 import account.TrainRouteVTIAccount;
+import account.VTIAccount;
 
 
 public class VTI {
@@ -26,9 +27,7 @@ public class VTI {
         
 		HashMap<String, Thread> vti = new HashMap<String, Thread>();
 		addTrainRoutes(vti);
-		//vti.put("simpleasure", new Thread(new VTIAccount("simpleasure")) );
-		//vti.put("VTIDEMOROBOT", new Thread(new VTIAccount("VTIDEMOROBOT")) );
-		//vti.put("Sol_Ma", new Thread(new VTIAccount("Sol_Ma")) );
+		addMiscAccounts(vti);
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
@@ -58,6 +57,16 @@ public class VTI {
 		try {
 			for(String route: FeedReader.route_id.keySet())
 				vti.put(route, new Thread(new TrainRouteVTIAccount(route)) );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addMiscAccounts(HashMap<String, Thread> vti){
+		try {
+			vti.put("simpleasure", new Thread(new VTIAccount("simpleasure")) );
+			//vti.put("VTIDEMOROBOT", new Thread(new VTIAccount("VTIDEMOROBOT")) );
+			//vti.put("Sol_Ma", new Thread(new VTIAccount("Sol_Ma")) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -115,11 +115,9 @@ public class CTABusParser extends DefaultHandler {
 			System.err.println("CTA Bus Parsing server started: ");
 			Class.forName("org.postgresql.Driver").newInstance();
 			Connection db = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/testdb", "postgres",
-					"131122");
-			// Connection
-			// db=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ita","leon","stenneth");
-
+					"jdbc:postgresql://localhost:5433/postgis", "postgres",
+					"postgresql");
+			
 			String DocumentURL = "http://www.ctabustracker.com/bustime/map/getBusesForRouteAll.jsp";
 			SAXParser saxParser = factory.newSAXParser();
 
