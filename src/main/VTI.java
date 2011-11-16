@@ -10,6 +10,7 @@ import account.VTIAccount;
 
 
 public class VTI {
+	//static database connection for the whole VTI daemon program
 	public static Connection conn;
 	static{
 		try {

@@ -1,5 +1,5 @@
 package account;
-import default.VTI;
+import main.VTI;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -36,16 +36,13 @@ public class VTIAccount implements Runnable {
 	protected final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
 	protected final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
 	// caches to reduce number of database accesses
+	// <username, accessToken+" "+accessTokenSecret>
 	protected static HashMap<String, String> existing_credentials;
 	static{
 		//only access the credential table in the local database once 
 		try{
 		existing_credentials = new HashMap<String, String>();
-		Class.forName("org.postgresql.Driver").newInstance();
-		VTI.conn = DriverManager.getConnection(
-				"jdbc:postgresql://localhost:5433/VTI", "postgres",
-				"postgresql");
-		Statement stat = conn.createStatement();
+		Statement stat = VTI.conn.createStatement();
 		ResultSet rs = stat.executeQuery("select * from credentials;");
 		while (rs.next()) {
 			existing_credentials.put(
@@ -68,7 +65,6 @@ public class VTIAccount implements Runnable {
 	protected LinkedHashSet<String> seen_statuses;
 
 	public static Twitter authorize(String screen_name) {
-		// <username, accessToken+" "+accessTokenSecret>
 		Twitter twitter = null;
 		AccessToken accessToken = null;
     	try {
@@ -141,7 +137,7 @@ public class VTIAccount implements Runnable {
 					}
 					
 					//insert the credential of the new user into local database
-					PreparedStatement prep=conn.prepareStatement("INSERT INTO credentials VALUES(?,?,?, now())");
+					PreparedStatement prep=VTI.conn.prepareStatement("INSERT INTO credentials VALUES(?,?,?, now())");
 					prep.setString(1, screen_name.toLowerCase());
 					prep.setString(2, accessToken.getToken());
 					prep.setString(3, accessToken.getTokenSecret());
