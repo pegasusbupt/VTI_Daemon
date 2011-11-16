@@ -3,14 +3,13 @@ package account;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
-import utils.*;
 
-import twitter4j.Status;
 import twitter4j.TwitterException;
+import utils.FeedReader;
+import utils.StringProcess;
 
 public class TrainRouteVTIAccount extends VTIAccount {
 

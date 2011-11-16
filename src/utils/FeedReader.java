@@ -6,6 +6,11 @@ package utils;
  * @author Sol Ma
  *
  */
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -15,12 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -28,8 +27,9 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 public class FeedReader {
-	public final static HashMap<String, String> route_id=new HashMap<String, String>();
+	public final static HashMap<String, String> route_id;
 	static{
+		route_id=new HashMap<String, String>();
 		//route_id.put("vti_redline", "307");
 		//route_id.put("vti_purpleline", "308");
 		//route_id.put("vti_yellowline", "309");

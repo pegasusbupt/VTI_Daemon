@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.util.HashMap;
 
-import twitter4j.TwitterException;
 import utils.FeedReader;
 import account.TrainRouteVTIAccount;
 import account.VTIAccount;

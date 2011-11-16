@@ -1,15 +1,20 @@
 package utils;
 
-import java.io.*;
-import java.net.URL;
-import java.net.*;
-import java.util.*;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import java.sql.*;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
+
 import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 //this class updates the database of buses moving in real time. it reads from the cta bustraker and put it in a databse
 public class CTABusParser extends DefaultHandler {

@@ -2,14 +2,9 @@ package account;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,10 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Properties;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -40,39 +33,46 @@ import twitter4j.conf.ConfigurationBuilder;
  * 
  */
 public class VTIAccount implements Runnable {
-	public final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
-	public final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
-
+	protected final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
+	protected final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
+	// caches to reduce number of database accesses
+	protected static HashMap<String, String> existing_credentials;
+	protected static Connection conn;
+	static{
+		//only access the credential table in the local database once 
+		try{
+		existing_credentials = new HashMap<String, String>();
+		Class.forName("org.postgresql.Driver").newInstance();
+		conn = DriverManager.getConnection(
+				"jdbc:postgresql://localhost:5433/VTI", "postgres",
+				"postgresql");
+		Statement stat = conn.createStatement();
+		ResultSet rs = stat.executeQuery("select * from credentials;");
+		while (rs.next()) {
+			existing_credentials.put(
+					rs.getString("username"),
+					rs.getString("accessToken") + " "
+							+ rs.getString("accessTokenSecret"));
+			System.out.println("username = " + rs.getString("username"));
+			System.out.println("accessToken = "
+					+ rs.getString("accessToken"));
+			System.out.println("accessTokenSecret = "
+					+ rs.getString("accessTokenSecret"));
+		}
+		rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	protected Twitter twitter;
 	protected User user;
 	protected LinkedHashSet<String> seen_statuses;
 
 	public static Twitter authorize(String screen_name) {
 		// <username, accessToken+" "+accessTokenSecret>
-		HashMap<String, String> existing_credentials = new HashMap<String, String>();
-		Properties prop = new Properties();
 		Twitter twitter = null;
 		AccessToken accessToken = null;
     	try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			Connection conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5433/VTI", "postgres",
-					"postgresql");
-			Statement stat = conn.createStatement();
-			ResultSet rs = stat.executeQuery("select * from credentials;");
-			while (rs.next()) {
-				existing_credentials.put(
-						rs.getString("username"),
-						rs.getString("accessToken") + " "
-								+ rs.getString("accessTokenSecret"));
-				System.out.println("username = " + rs.getString("username"));
-				System.out.println("accessToken = "
-						+ rs.getString("accessToken"));
-				System.out.println("accessTokenSecret = "
-						+ rs.getString("accessTokenSecret"));
-			}
-			rs.close();
-
 			// screen name is case-insensitive
 			// the user has already authorized VTI
 			if (existing_credentials.containsKey(screen_name.toLowerCase())) {
@@ -140,11 +140,18 @@ public class VTIAccount implements Runnable {
 							}
 						}
 					}
+					
+					//insert the credential of the new user into local database
 					PreparedStatement prep=conn.prepareStatement("INSERT INTO credentials VALUES(?,?,?, now())");
 					prep.setString(1, screen_name.toLowerCase());
 					prep.setString(2, accessToken.getToken());
 					prep.setString(3, accessToken.getTokenSecret());
 					prep.executeUpdate();
+					//insert the credential of the new user into cache
+					existing_credentials.put(
+							screen_name.toLowerCase(),
+							accessToken.getToken()+ " "
+									+ accessToken.getTokenSecret());
 					
 					System.out.println("Successfully stored access token to local database.");
 					// System.exit(0);
