@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +43,33 @@ public class FeedReader {
 		route_id.put("vti_brownline", "313");
 		//route_id.put("vti_orangeline", "314");
 		//route_id.put("vti_purpleexpressline", "323");
+	}
+	protected static Connection conn;
+	static{
+		//only access the credential table in the local database once 
+		try{
+	//	existing_credentials = new HashMap<String, String>();
+		Class.forName("org.postgresql.Driver").newInstance();
+		conn = DriverManager.getConnection(
+				"jdbc:postgresql://localhost:5433/VTI", "postgres",
+				"postgresql");
+		Statement stat = conn.createStatement();
+		ResultSet rs = stat.executeQuery("select * from credentials;");
+		while (rs.next()) {
+			existing_credentials.put(
+					rs.getString("username"),
+					rs.getString("accessToken") + " "
+							+ rs.getString("accessTokenSecret"));
+			System.out.println("username = " + rs.getString("username"));
+			System.out.println("accessToken = "
+					+ rs.getString("accessToken"));
+			System.out.println("accessTokenSecret = "
+					+ rs.getString("accessTokenSecret"));
+		}
+		rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	/*

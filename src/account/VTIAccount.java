@@ -1,5 +1,5 @@
 package account;
-
+import default.VTI;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -37,13 +37,12 @@ public class VTIAccount implements Runnable {
 	protected final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
 	// caches to reduce number of database accesses
 	protected static HashMap<String, String> existing_credentials;
-	protected static Connection conn;
 	static{
 		//only access the credential table in the local database once 
 		try{
 		existing_credentials = new HashMap<String, String>();
 		Class.forName("org.postgresql.Driver").newInstance();
-		conn = DriverManager.getConnection(
+		VTI.conn = DriverManager.getConnection(
 				"jdbc:postgresql://localhost:5433/VTI", "postgres",
 				"postgresql");
 		Statement stat = conn.createStatement();
