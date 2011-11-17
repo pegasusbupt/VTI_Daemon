@@ -27,14 +27,14 @@ public class FeedReader {
 	public final static HashMap<String, String> route_id;
 	static {
 		route_id = new HashMap<String, String>();
-		// route_id.put("vti_redline", "307");
-		// route_id.put("vti_purpleline", "308");
-		// route_id.put("vti_yellowline", "309");
-		// route_id.put("vti_blueline", "310");
-		// route_id.put("vti_pinkline", "311");
-		// route_id.put("vti_greenline", "312");
+		route_id.put("vti_redline", "307");
+		route_id.put("vti_purpleline", "308");
+		route_id.put("vti_yellowline", "309");
+		route_id.put("vti_blueline", "310");
+		route_id.put("vti_pinkline", "311");
+		//route_id.put("vti_greenline", "312");
 		route_id.put("vti_brownline", "313");
-		// route_id.put("vti_orangeline", "314");
+		route_id.put("vti_orangeline", "314");
 		// route_id.put("vti_purpleexpressline", "323");
 	}
 	// caches to reduce number of database accesses
@@ -62,6 +62,7 @@ public class FeedReader {
 	}
 
 	public static List<String> retrieveFeeds(String url) {
+		// used to save the new alerts
 		ArrayList<String> alerts = new ArrayList<String>();
 		try {
 			URL feedUrl = new URL(url);
@@ -91,6 +92,7 @@ public class FeedReader {
 					prep.setString(3, entry.getDescription().getValue());
 					prep.setDate(4, new Date(entry.getPublishedDate().getTime()));
 					prep.executeUpdate();
+					//added to the new alerts collection
 					alerts.add(entry.getDescription().getValue());
 				}
 			}

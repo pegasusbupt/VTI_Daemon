@@ -27,8 +27,7 @@ import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- * It posts tweets on VTI Twitter accounts.
- * 
+ *  
  * @author Sol Ma
  * 
  */
