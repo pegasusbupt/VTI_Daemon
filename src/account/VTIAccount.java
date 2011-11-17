@@ -1,5 +1,4 @@
 package account;
-import main.VTI;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -8,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import main.VTI;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
