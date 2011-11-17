@@ -48,11 +48,9 @@ public class VTIAccount implements Runnable {
 					rs.getString("username"),
 					rs.getString("accessToken") + " "
 							+ rs.getString("accessTokenSecret"));
-			System.out.println("username = " + rs.getString("username"));
-			System.out.println("accessToken = "
-					+ rs.getString("accessToken"));
-			System.out.println("accessTokenSecret = "
-					+ rs.getString("accessTokenSecret"));
+			//System.out.println("username = " + rs.getString("username"));
+			//System.out.println("accessToken = "+ rs.getString("accessToken"));
+			//System.out.println("accessTokenSecret = "+ rs.getString("accessTokenSecret"));
 		}
 		rs.close();
 		}catch(Exception e){

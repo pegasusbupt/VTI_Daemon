@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import main.VTI;
@@ -51,9 +50,9 @@ public class FeedReader {
 						rs.getString("route_id") + " "
 								+ rs.getString("alert_id"),
 						rs.getString("alert"));
-				System.out.println("route_id = " + rs.getString("route_id"));
-				System.out.println("alert_id = " + rs.getString("alert_id"));
-				System.out.println("alert= " + rs.getString("alert"));
+				//System.out.println("route_id = " + rs.getString("route_id"));
+				//System.out.println("alert_id = " + rs.getString("alert_id"));
+				//System.out.println("alert= " + rs.getString("alert"));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -68,8 +67,7 @@ public class FeedReader {
 			URL feedUrl = new URL(url);
 			String routeId = url.substring(url.lastIndexOf('=') + 1);
 			// System.out.println(routeId);
-			String idFile = "cta_rss/alert_ids/" + routeId;
-
+			
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = input.build(new XmlReader(feedUrl));
 			PreparedStatement prep = VTI.conn
