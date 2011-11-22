@@ -28,7 +28,7 @@ public class VTI {
 	
 	public void run(String[] args){
 		// default running time equals to minutes
-		long run_time = 1000 * 10;
+		long run_time = 1000 * 5;
 		if (args.length > 0) {
 			try {
 				run_time = Long.parseLong(args[0]) * 1000;
@@ -46,7 +46,8 @@ public class VTI {
 		long start_time=System.currentTimeMillis();
 		for( Thread account: vti.values())
 			account.start();
-	
+	    
+	    //while(true){
 		while(System.currentTimeMillis()-start_time<run_time){
 			try {
 				Thread.sleep(1000);
@@ -77,9 +78,7 @@ public class VTI {
 	
 	public void addMiscAccounts(HashMap<String, Thread> vti){
 		try {
-			vti.put("simpleasure", new Thread(new VTIAccount("simpleasure")) );
-			//vti.put("VTIDEMOROBOT", new Thread(new VTIAccount("VTIDEMOROBOT")) );
-			//vti.put("Sol_Ma", new Thread(new VTIAccount("Sol_Ma")) );
+			vti.put("VTI_Robot", new Thread(new VTIAccount("VTI_Robot")) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
