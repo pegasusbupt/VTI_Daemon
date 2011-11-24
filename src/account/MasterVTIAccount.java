@@ -1,35 +1,16 @@
 package account;
 
-import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import main.VTI;
 import twitter4j.GeoLocation;
-import twitter4j.Place;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
-import twitter4j.conf.ConfigurationBuilder;
-import utils.FeedReader;
 import utils.StringProcess;
 
 /**
@@ -41,18 +22,30 @@ public class MasterVTIAccount extends VTIAccount {
 	public MasterVTIAccount(String screen_name) throws IOException {
 		super(screen_name);
 	}
+	
+	double calculateDistance(GeoLocation l1, GeoLocation l2){
+		//TODO: implement distance calculation
+		return 0;
+	}
 
-	Twitter assignPublication(Status status) {
+	VTIAccount assignPublication(Status status) {
 		GeoLocation loc = status.getGeoLocation();
-		Place plc = status.getPlace();
+		VTIAccount ret=null;
 		if (loc != null)
 			System.out.println(loc);
 		else{
 			System.out.println(status.getText()+" is not embeded with location information");
-			return null;
+			return ret;
 		}
-		
-        return null;
+		double minimum=Double.MAX_VALUE;
+		for(VTIAccount account: VTI.vti.values()){
+			double dis=calculateDistance(account.location, loc);
+			if(dis<minimum){
+				minimum=dis;
+				ret=account;
+			}
+		}
+        return ret;
 		
 	}
 
@@ -84,13 +77,13 @@ public class MasterVTIAccount extends VTIAccount {
 						logOut.newLine();
 
 						// determine which account this status is assigned to
-						Twitter targetAccount = assignPublication(status);
+						VTIAccount targetAccount = assignPublication(status);
 						if (targetAccount != null)
 							if (status.getText().length() > 140)
-								targetAccount.updateStatus(StringProcess
+								targetAccount.twitter.updateStatus(StringProcess
 										.messageShorten(status.getText()));
 							else
-								targetAccount.updateStatus(status.getText());
+								targetAccount.twitter.updateStatus(status.getText());
 
 					}
 					logOut.newLine();

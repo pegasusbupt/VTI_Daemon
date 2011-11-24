@@ -2,6 +2,7 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import utils.FeedReader;
@@ -10,6 +11,8 @@ import account.VTIAccount;
 
 
 public class VTI {
+	public final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
+	public final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
 	//static database connection for the whole VTI daemon program
 	public static Connection conn;
 	static{
@@ -22,6 +25,8 @@ public class VTI {
 			e.printStackTrace();
 		}
 	}
+	public static HashMap<String, VTIAccount> vti = new HashMap<String, VTIAccount>();
+	
 	public static void main(String[] args){
 		new VTI().run(args);
 	}
@@ -38,14 +43,17 @@ public class VTI {
 			}
 		}
         
-		HashMap<String, Thread> vti = new HashMap<String, Thread>();
-		addTrainRoutes(vti);
-		addMasterAccount(vti);
+		addCTAFeedsAccounts();
+		addMasterAccount();
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
-		for( Thread account: vti.values())
-			account.start();
+		ArrayList<Thread> threads=new ArrayList<Thread>();
+		for( VTIAccount account: vti.values()){
+			Thread t=new Thread(account);
+			threads.add(t);
+			t.start();
+		}
 	    
 	    //while(true){
 		while(System.currentTimeMillis()-start_time<run_time){
@@ -56,29 +64,29 @@ public class VTI {
 			}
 		}
 
-		// for each account, stop monitoring statuses
-		for( Thread account: vti.values())
-			account.interrupt();
+		// interrupt running threads
+		for( Thread t: threads)
+			t.interrupt();
 		
 		System.out.println("**********************************************************");
 		System.out.println("Run time drains out! Program is termined.");
 		System.out.println("**********************************************************");
-		//System.exit(0);
+		System.exit(0);
        
 	}
 	
-	public void addTrainRoutes(HashMap<String, Thread> vti){
+	public void addCTAFeedsAccounts(){
 		try {
 			for(String route: FeedReader.route_id.keySet())
-				vti.put(route, new Thread(new TrainRouteVTIAccount(route)) );
+				vti.put(route, new TrainRouteVTIAccount(route) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void addMasterAccount(HashMap<String, Thread> vti){
+	public void addMasterAccount(){
 		try {
-			vti.put("VTI_Robot", new Thread(new VTIAccount("VTI_Robot")) );
+			vti.put("VTI_Robot", new VTIAccount("VTI_Robot") );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

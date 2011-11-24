@@ -16,7 +16,6 @@ import java.util.List;
 
 import main.VTI;
 import twitter4j.GeoLocation;
-import twitter4j.Place;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -32,10 +31,7 @@ import twitter4j.conf.ConfigurationBuilder;
  * 
  */
 public class VTIAccount implements Runnable {
-	protected final static String VTI_CONSUMER_KEY = "UJxOUdtJm8p3wEOFatp1Q";
-	protected final static String VTI_CONSUMER_SECRET = "6wIgL90ZKeWPk7G1y0QfztkSm13NiD2Rk3v5Lf7XAg";
-	// caches to reduce number of database accesses
-	// <username, accessToken+" "+accessTokenSecret>
+	// caches to reduce number of database accesses format is <username, accessToken+" "+accessTokenSecret>
 	protected static HashMap<String, String> existing_credentials;
 	static{
 		//only access the credential table in the local database once 
@@ -59,7 +55,10 @@ public class VTIAccount implements Runnable {
 	}
 	protected Twitter twitter;
 	protected User user;
+	//geographical location this account is mapping
+	protected GeoLocation location;
 	protected LinkedHashSet<String> seen_statuses;
+	
 
 	public static Twitter authorize(String screen_name) {
 		Twitter twitter = null;
@@ -73,8 +72,8 @@ public class VTIAccount implements Runnable {
 						screen_name.toLowerCase()).split(" ");
 				TwitterFactory tf = new TwitterFactory(
 						new ConfigurationBuilder().setDebugEnabled(true)
-								.setOAuthConsumerKey(VTI_CONSUMER_KEY)
-								.setOAuthConsumerSecret(VTI_CONSUMER_SECRET)
+								.setOAuthConsumerKey(VTI.VTI_CONSUMER_KEY)
+								.setOAuthConsumerSecret(VTI.VTI_CONSUMER_SECRET)
 								.setOAuthAccessToken(values[0])
 								.setOAuthAccessTokenSecret(values[1]).build());
 				twitter = tf.getInstance();
@@ -86,8 +85,8 @@ public class VTIAccount implements Runnable {
 						// database
 				try {
 					twitter = new TwitterFactory().getInstance();
-					twitter.setOAuthConsumer(VTI_CONSUMER_KEY,
-							VTI_CONSUMER_SECRET);
+					twitter.setOAuthConsumer(VTI.VTI_CONSUMER_KEY,
+							VTI.VTI_CONSUMER_SECRET);
 
 					RequestToken requestToken = twitter.getOAuthRequestToken();
 					System.out.println("Got request token.");
@@ -172,6 +171,7 @@ public class VTIAccount implements Runnable {
 			twitter = authorize(screen_name);
 			user = twitter.verifyCredentials();
 			seen_statuses = new LinkedHashSet<String>();
+			//TODO: initialize location field
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
