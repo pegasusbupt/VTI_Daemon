@@ -16,8 +16,8 @@ public class VTI {
 		try {
 			Class.forName("org.postgresql.Driver").newInstance();
 			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5433/VTI", "postgres",
-					"postgresql");
+					"jdbc:postgresql://localhost:5432/VTI", "postgres",
+					"postgres");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
