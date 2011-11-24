@@ -40,7 +40,7 @@ public class VTI {
         
 		HashMap<String, Thread> vti = new HashMap<String, Thread>();
 		addTrainRoutes(vti);
-		addMiscAccounts(vti);
+		addMasterAccount(vti);
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
@@ -76,7 +76,7 @@ public class VTI {
 		}
 	}
 	
-	public void addMiscAccounts(HashMap<String, Thread> vti){
+	public void addMasterAccount(HashMap<String, Thread> vti){
 		try {
 			vti.put("VTI_Robot", new Thread(new VTIAccount("VTI_Robot")) );
 		} catch (IOException e) {

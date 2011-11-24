@@ -211,14 +211,7 @@ public class VTIAccount implements Runnable {
 								+ " - " + status.getText());
 						// remove @screen_name (regardless letter cases) within
 						// the status
-						GeoLocation  loc=status.getGeoLocation();
-						Place plc=status.getPlace();
 						
-						if(loc!=null)
-							System.out.println(loc);
-						else
-							if(plc!=null) System.out.println(plc);
-							else System.out.println("no location or place info. embeded.");
 						String new_status = status.getText().replaceAll(
 								"@" + user.getScreenName(), "");
 						new_status = new_status.replaceAll("@"
