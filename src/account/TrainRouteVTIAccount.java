@@ -35,6 +35,7 @@ public class TrainRouteVTIAccount extends VTIAccount {
 			List<String> statuses;
 			
 			try {
+				//System.out.println(FeedReader.route_id.get(twitter.getScreenName().toLowerCase())+"  "+twitter.getScreenName().toLowerCase());
 				statuses = FeedReader
 						.retrieveFeeds("http://www.transitchicago.com/rss/railalertsrss.aspx?RouteId="+FeedReader.route_id.get(twitter.getScreenName().toLowerCase()));
 				// dms = twitter.getDirectMessages();

@@ -44,7 +44,7 @@ public class VTI {
 		}
         
 		addCTAFeedsAccounts();
-		addMasterAccount();
+		//addMasterAccount();
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
@@ -77,8 +77,9 @@ public class VTI {
 	
 	public void addCTAFeedsAccounts(){
 		try {
-			for(String route: FeedReader.route_id.keySet())
+			for(String route: FeedReader.route_id.keySet()){
 				vti.put(route, new TrainRouteVTIAccount(route) );
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

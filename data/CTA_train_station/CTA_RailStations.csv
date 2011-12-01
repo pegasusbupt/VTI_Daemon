@@ -1,0 +1,144 @@
+STATION_ID,LONGNAME,LINES,ADDRESS,ADA,PKNRD,GTFS
+1160,Clinton-Lake,"Green (Lake) Pink",540 W. Lake Street,1,0,41160
+490,Grand/Milwaukee,Blue Line (O'Hare),502 N. Milwaukee Avenue,0,0,40490
+1410,Chicago/Milwaukee,Blue Line,800 N. Milwaukee Avenue,0,0,41410
+590,Damen/Milwaukee,Blue Line,1588 N. Damen Avenue,0,0,40590
+570,California/Milwaukee,Blue Line (O'Hare),2211 N. California Avenue,0,0,40570
+60,Belmont-O'Hare,Blue Line,3355 W. Belmont Avenue,0,0,40060
+1330,Montrose-O'Hare,Blue Line,4600 W. Montrose Avenue,0,0,41330
+1280,Jefferson Park,Blue Line,4917 N. Milwaukee Avenue,1,0,41280
+1430,87th,Red Line,15 W. 87th Street,0,0,41430
+240,79th,Red Line,15 W. 79th Street,1,0,40240
+1230,47th-Dan Ryan,Red Line,220 W. 47th Street,1,0,41230
+190,Sox-35th-Dan Ryan,Red Line,142 W. 35th Street,1,0,40190
+1000,Cermak-Chinatown,Red Line,138 W. Cermak Road,0,0,41000
+720,Cottage Grove-East 63rd,Green Line,800 E. 63rd Street,1,0,40720
+1140,King Drive,Green Line,400 E. 63rd Street,1,0,41140
+940,Halsted/63rd,Green Line,6321-25 S. Halsted Street,1,0,40940
+290,Ashland/63rd,Green Line (Englewood),6315 S. Ashland Avenue,1,1,40290
+1080,47th-South Elevated,Green Line,314 E. 47th Street,1,0,41080
+410,Roosevelt/Wabash,Orange & Green Lines,22 E. Roosevelt Road,1,0,40410
+890,O'Hare Airport,Blue Line,1000 O'Hare Drive,1,0,40890
+770,Lawrence,Red Line,1117 W. Lawrence Avenue,0,0,40770
+1320,Belmont-North Main,"Red Brown Purple (Express)",945 W. Belmont Avenue,1,0,41320
+650,North/Clybourn,Red Line,1599 N. Clybourn Avenue,0,0,40650
+1300,Loyola,Red Line,1200 W. Loyola Avenue,1,0,41300
+400,Noyes,"Purple Line Evanston Express",901 W. Noyes Street,0,0,40400
+900,Howard,"Red Yellow Purple Evanston Express",1649 W. Howard Street,1,1,40900
+340,Berwyn,Red Line,1121 W. Berwyn Avenue,0,0,40340
+1070,Kedzie-Lake,Green Line (Lake),3200 W. Lake Street,1,0,41070
+100,Morse,Red Line,1358 W. Morse Avenue,0,0,40100
+1450,Chicago/State,Red Line,800 N. State Street,1,0,41450
+330,Grand/State,Red Line,521 N. State Street,0,0,40330
+800,Sedgwick,"Brown Purple (Express)",1536-40 N. Sedgwick Avenue,1,0,40800
+1010,Rockwell,Brown Line,4648 N. Rockwell Street,1,0,41010
+920,Pulaski-Congress,Blue Line (Congress),530 S. Pulaski Road,0,0,40920
+180,Oak Park-Congress,Blue Line,950 S. Oak Park Avenue,0,0,40180
+980,Harlem-Congress,Blue Line (Congress),701 S. Harlem Avenue,0,0,40980
+960,Pulaski-Midway,Orange Line,5106 S. Pulaski Road,1,1,40960
+250,Kedzie-Homan,Blue Line (Congress),530 S. Kedzie Avenue,1,0,40250
+390,Forest Park,Blue Line,711 S. Des Plaines Avenue,1,1,40390
+1090,Monroe/State,Red Line,26 S. State,0,0,41090
+750,Harlem-O'Hare,Blue Line (O'Hare),5550 N. Harlem Avenue,1,1,40750
+610,Ridgeland,Green Line (Lake),36 N. Ridgeland Avenue,0,0,40610
+700,Laramie,Green Line (Lake),5148 W. Lake Street,1,0,40700
+1360,California-Lake,Green Line (Lake),2800 W. Lake Street,1,0,41360
+670,Western/Milwaukee,Blue Line (O'Hare),1909-11 N. Western Avenue,1,0,40670
+1240,Addison-O'Hare,Blue Line,3622 W. Addison Street,0,0,41240
+510,Garfield-South Elevated,Green Line,320 E. Garfield Boulevard,1,1,40510
+310,Western-Midway,Orange Line,4901 S. Western Avenue,1,1,40310
+120,35th/Archer,Orange Line,3528 S. Leavitt Street,1,1,40120
+1030,Polk,Pink,1713 W. Polk Street,1,0,41030
+440,California-Douglas,Pink,2011 S. California Avenue,1,0,40440
+1040,Kedzie-Douglas,Pink,1944 S. Kedzie Avenue,1,0,41040
+580,54th/Cermak,Pink,2134 S. 54th Avenue,1,1,40580
+350,UIC-Halsted,Blue Line,430 S. Halsted Street,1,0,40350
+430,Clinton-Congress,Blue Line,426 S. Clinton Street,0,0,40430
+1340,LaSalle,Blue Line,150 W. Congress Parkway,0,0,41340
+540,Wilson,Red Line,4920 N. Broadway Street,0,0,40540
+660,Armitage,"Brown Purple (Express)",944-46 W. Armitage Avenue,1,0,40660
+280,Central-Lake,Green Line (Lake),350 N. Central Avenue,1,0,40280
+30,Pulaski-Lake,Green Line (Lake),4000 W. Lake Street,1,0,40030
+1250,Central-Evanston,"Purple Line Evanston Express",1022 W. Central Avenue,0,0,41250
+520,Foster,"Purple Line Evanston Express",900 W. Foster Street,0,0,40520
+1670,Conservatory-Central Park,Green Line (Lake),3631 W. Lake Street,1,0,41670
+80,Sheridan,Red Line,3940 N. Sheridan Road,0,0,40080
+1420,Addison-North Main,Red Line,940 W. Addison Street,1,0,41420
+380,Clark/Lake,"Brown Orange Pink Purple (Express) Green Blue",100 W. Lake,1,0,40380
+70,Jackson/Dearborn,Blue Line,328 S. Dearborn,1,0,40070
+630,Clark/Division,Red Line,1200 N. Clark Street,0,0,40630
+1050,Linden,"Purple Line Evanston Express",349 W. Linden Avenue,1,1,41050
+840,South Boulevard,"Purple Line Evanston Express",601 W. South Boulevard,0,0,40840
+1190,Jarvis,Red Line,1523 W. Jarvis Street,0,0,41190
+1380,Bryn Mawr,Red Line,1119 W. Bryn Mawr Avenue,0,0,41380
+460,Merchandise Mart,"Brown Purple (Express)",350 N. Wells Street,1,0,40460
+730,Washington/Wells,"Brown Orange Pink Purple (Express)",100 N. Wells Street,1,0,40730
+360,Southport,Brown Line,3411 N. Southport Avenue,1,0,40360
+680,Adams/Wabash,"Brown Orange Pink  Purple (Express) Green",201-23 S. Wabash Avenue,0,0,40680
+560,Jackson/State,Red Line,230 S. State,1,0,40560
+820,Rosemont,Blue Line,5801 N. River Road,1,1,40820
+20,Harlem-Lake,Green Line (Lake),1 S. Harlem Avenue,1,0,40020
+320,Division/Milwaukee,Blue Line,1200 N. Milwaukee Avenue,0,0,40320
+450,95th/Dan Ryan,Red Line,14 W. 95th Street,1,0,40450
+910,63rd-Dan Ryan,Red Line,220 W. 63rd Street,0,0,40910
+1170,Garfield-Dan Ryan,Red Line,220 W. Garfield Boulevard,0,0,41170
+1400,Roosevelt/State,Red Line,1167 S. State Street,1,0,41400
+1270,43rd,Green Line,314 E. 43rd Street,1,0,41270
+300,Indiana,Green Line,4003 S. Indiana Avenue,1,0,40300
+550,Irving Park-O'Hare,Blue Line,4131 W. Irving Park Road,0,0,40550
+480,Cicero-Lake,Green Line (Lake),4800 W. Lake Street,1,0,40480
+500,Washington/State,Red Line,128 N. State,1,0,40500
+790,Monroe/Dearborn,Blue Line,114 S. Dearborn,0,0,40790
+40,Quincy/Wells,"Brown Orange Pink Purple (Express)",220 S. Wells Street,0,0,40040
+1200,Argyle,Red Line,1118 W. Argyle Street,0,0,41200
+1290,Kimball,Brown Line,4755-57 N. Kimball Avenue,1,1,41290
+1180,Kedzie-Ravenswood,Brown Line,4648 N. Kedzie Avenue,1,0,41180
+1460,Irving Park-Ravenswood,Brown Line,1816-18 W. Irving Park Avenue,1,0,41460
+470,Racine,Blue Line,430 S. Racine Avenue,0,0,40470
+810,Illinois Medical District,Blue Line,430 S. Damen Avenue,1,0,40810
+220,Western-Congress,Blue Line (Congress),430 S. Western Avenue,0,0,40220
+10,Austin-Congress,Blue Line,1050 S. Austin Blvd,0,0,40010
+970,Cicero-Congress,Blue Line (Congress),720 S. Cicero Avenue,0,0,40970
+850,Library,"Brown Orange Pink Purple (Express)",26 W. Van Buren Street,1,0,40850
+1020,Logan Square,Blue Line,2620 N. Milwaukee Av,1,0,41020
+990,69th,Red Line,15 W. 69th Street,1,0,40990
+130,51st,Green Line,314 E. 51st Street,1,0,40130
+930,Midway Airport,Orange Line,4612 W. 59th Street,1,1,40930
+1150,Kedzie-Midway,Orange Line,4900 S. Kedzie Avenue,1,1,41150
+1060,Ashland-Midway,Orange Line,3011 S. Ashland Avenue,1,0,41060
+1130,Halsted-Midway,Orange Line,2520 S. Archer Avenue,1,1,41130
+830,18th,Pink,1710 W. 18th Street,1,0,40830
+210,Damen,Pink,2010 S. Damen Avenue,1,0,40210
+740,Western-Douglas,Pink,2009 S. Western Avenue,1,0,40740
+780,Central Park,Pink,1915 S. Central Park Avenue,1,0,40780
+150,Pulaski-Douglas,Pink,2005 S. Pulaski Road,1,0,40150
+600,Kostner,Pink,2019 S. Kostner Avenue,1,0,40600
+420,Cicero-Douglas,Pink,2133 S. 48th Court,1,0,40420
+530,Diversey,"Brown Purple (Express)",940-44 W. Diversey Avenue,1,0,40530
+1120,35-Bronzeville-IIT,Green Line,16 E. 35th Street,1,0,41120
+270,Main,"Purple Line Evanston Express",836 N. Chicago Avenue,0,0,40270
+760,Granville,Red Line,1119 W. Granville Avenue,1,0,40760
+880,Thorndale,Red Line,1118 W. Thorndale Avenue,0,0,40880
+1210,Wellington,"Brown Purple (Express)",945 W. Wellington Avenue,1,0,41210
+1220,Fullerton,"Red Brown Purple (Express)",943  W. Fullerton Avenue,1,0,41220
+140,Skokie,Yellow Line,5001 W. Dempster Street,1,1,40140
+50,Davis,"Purple Line Evanston Express",1612 N. Benson Avenue,1,0,40050
+690,Dempster,"Purple Line Evanston Express",1316 N. Sherman Avenue,0,0,40690
+370,Washington/Dearborn,Blue Line,19 N. Dearborn,0,0,40370
+710,Chicago/Franklin,"Brown Purple (Express)",300-02 W. Chicago Avenue,1,0,40710
+1480,Western-Ravenswood,Brown Line,4645-49 N. Western Avenue,1,0,41480
+870,Francisco,Brown Line,4648 N. Francisco Avenue,1,0,40870
+1440,Addison-Ravenswood,Brown Line,1818-20 W. Addison Street,1,0,41440
+1310,Paulina,Brown Line,3411 N. Paulina Street,1,0,41310
+90,Damen-Ravenswood,Brown Line,4643-47 N. Damen Avenue,1,0,40090
+1500,Montrose-Ravenswood,Brown Line,1814-16 W. Montrose Avenue,1,0,41500
+160,LaSalle/Van Buren,"Brown Orange Pink Purple (Express)",121 W. Van Buren Street,0,0,40160
+640,Madison/Wabash,"Brown Orange Pink  Purple (Express) Green",2 N. Wabash Avenue,0,0,40640
+200,Randolph/Wabash,"Brown Orange Pink  Purple (Express) Green",151 N. Wabash Avenue,0,0,40200
+260,State/Lake,"Brown Orange Pink  Purple (Express) Green",200 N. State Street,0,0,40260
+1660,Lake/State,Red Line,188 N. State,1,0,41660
+1490,Harrison,Red Line,608 S. State Street,0,0,41490
+230,Cumberland,Blue Line,5800 N. Cumberland Avenue,1,1,40230
+1350,Oak Park-Lake,Green Line (Lake),100 S. Oak Park Avenue,0,0,41350
+1260,Austin-Lake,Green Line (Lake),351 N. Austin Blvd,0,0,41260
+170,Ashland-Lake,"Green (Lake) Pink",1601 W. Lake Street,1,0,40170
