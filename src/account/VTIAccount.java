@@ -1,4 +1,5 @@
 package account;
+
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -26,44 +27,45 @@ import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- *  
+ * 
  * @author Sol Ma
  * 
  */
 public class VTIAccount implements Runnable {
-	// caches to reduce number of database accesses format is <username, accessToken+" "+accessTokenSecret>
+	// caches to reduce number of database accesses format is <username,
+	// accessToken+" "+accessTokenSecret>
 	protected static HashMap<String, String> existing_credentials;
-	static{
-		//only access the credential table in the local database once 
-		try{
-		existing_credentials = new HashMap<String, String>();
-		Statement stat = VTI.conn.createStatement();
-		ResultSet rs = stat.executeQuery("select * from credentials;");
-		while (rs.next()) {
-			existing_credentials.put(
-					rs.getString("username"),
-					rs.getString("accessToken") + " "
-							+ rs.getString("accessTokenSecret"));
-			//System.out.println("username = " + rs.getString("username"));
-			//System.out.println("accessToken = "+ rs.getString("accessToken"));
-			//System.out.println("accessTokenSecret = "+ rs.getString("accessTokenSecret"));
-		}
-		rs.close();
-		}catch(Exception e){
+	static {
+		// only access the credential table in the local database once
+		try {
+			existing_credentials = new HashMap<String, String>();
+			Statement stat = VTI.conn.createStatement();
+			ResultSet rs = stat.executeQuery("select * from credentials;");
+			while (rs.next()) {
+				existing_credentials.put(
+						rs.getString("username"),
+						rs.getString("accessToken") + " "
+								+ rs.getString("accessTokenSecret"));
+				// System.out.println("username = " + rs.getString("username"));
+				// System.out.println("accessToken = "+
+				// rs.getString("accessToken"));
+				// System.out.println("accessTokenSecret = "+
+				// rs.getString("accessTokenSecret"));
+			}
+			rs.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	protected Twitter twitter;
 	protected User user;
-	//geographical location this account is mapping
-	protected GeoLocation location;
+
 	protected LinkedHashSet<String> seen_statuses;
-	
 
 	public static Twitter authorize(String screen_name) {
 		Twitter twitter = null;
 		AccessToken accessToken = null;
-    	try {
+		try {
 			// screen name is case-insensitive
 			// the user has already authorized VTI
 			if (existing_credentials.containsKey(screen_name.toLowerCase())) {
@@ -71,7 +73,8 @@ public class VTIAccount implements Runnable {
 				String[] values = existing_credentials.get(
 						screen_name.toLowerCase()).split(" ");
 				TwitterFactory tf = new TwitterFactory(
-						new ConfigurationBuilder().setDebugEnabled(true)
+						new ConfigurationBuilder()
+								.setDebugEnabled(true)
 								.setOAuthConsumerKey(VTI.VTI_CONSUMER_KEY)
 								.setOAuthConsumerSecret(VTI.VTI_CONSUMER_SECRET)
 								.setOAuthAccessToken(values[0])
@@ -131,20 +134,22 @@ public class VTIAccount implements Runnable {
 							}
 						}
 					}
-					
-					//insert the credential of the new user into local database
-					PreparedStatement prep=VTI.conn.prepareStatement("INSERT INTO credentials VALUES(?,?,?, now())");
+
+					// insert the credential of the new user into local database
+					PreparedStatement prep = VTI.conn
+							.prepareStatement("INSERT INTO credentials VALUES(?,?,?, now())");
 					prep.setString(1, screen_name.toLowerCase());
 					prep.setString(2, accessToken.getToken());
 					prep.setString(3, accessToken.getTokenSecret());
 					prep.executeUpdate();
-					//insert the credential of the new user into cache
+					// insert the credential of the new user into cache
 					existing_credentials.put(
 							screen_name.toLowerCase(),
-							accessToken.getToken()+ " "
+							accessToken.getToken() + " "
 									+ accessToken.getTokenSecret());
-					
-					System.out.println("Successfully stored access token to local database.");
+
+					System.out
+							.println("Successfully stored access token to local database.");
 					// System.exit(0);
 				} catch (TwitterException te) {
 					te.printStackTrace();
@@ -159,7 +164,6 @@ public class VTIAccount implements Runnable {
 					+ accessToken.getTokenSecret());
 			System.out.println();
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -171,7 +175,6 @@ public class VTIAccount implements Runnable {
 			twitter = authorize(screen_name);
 			user = twitter.verifyCredentials();
 			seen_statuses = new LinkedHashSet<String>();
-			//TODO: initialize location field
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
@@ -182,18 +185,13 @@ public class VTIAccount implements Runnable {
 	}
 
 	public void run() {
-		PrintWriter logOut = null;
-		try {
-			logOut = new PrintWriter(new FileWriter("logs/"
-					+ twitter.getScreenName() + ".txt"));
-		} catch (IllegalStateException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (TwitterException e1) {
-			e1.printStackTrace();
-		}
-
+		/*
+		 * PrintWriter logOut = null; try { logOut = new PrintWriter(new
+		 * FileWriter("logs/" + twitter.getScreenName() + ".txt")); } catch
+		 * (IllegalStateException e1) { e1.printStackTrace(); } catch
+		 * (IOException e1) { e1.printStackTrace(); } catch (TwitterException
+		 * e1) { e1.printStackTrace(); }
+		 */
 		while (true) {
 			List<Status> statuses;
 			// List<DirectMessage> dms;
@@ -202,16 +200,12 @@ public class VTIAccount implements Runnable {
 				statuses = twitter.getMentions();
 				// dms = twitter.getDirectMessages();
 
-				logOut.println("Showing latest @" + user.getScreenName()
-						+ "'s mentions.");
 				for (Status status : statuses)
 					if (!seen_statuses.contains(String.valueOf(status.getId()))) {
 						seen_statuses.add(String.valueOf(status.getId()));
-						logOut.println("@" + status.getUser().getScreenName()
-								+ " - " + status.getText());
 						// remove @screen_name (regardless letter cases) within
 						// the status
-						
+
 						String new_status = status.getText().replaceAll(
 								"@" + user.getScreenName(), "");
 						new_status = new_status.replaceAll("@"
@@ -226,11 +220,9 @@ public class VTIAccount implements Runnable {
 			}
 
 			try {
-				logOut.println();
 				Thread.sleep(1000); // check the received tweets every 1 sec
 			} catch (InterruptedException e) {
 				// e.printStackTrace();
-				logOut.close();
 				break;
 			}
 

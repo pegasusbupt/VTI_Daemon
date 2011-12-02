@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +89,7 @@ public class FeedReader {
 					prep.setInt(1, Integer.parseInt(alertId));
 					prep.setInt(2, Integer.parseInt(routeId));
 					prep.setString(3, entry.getDescription().getValue());
-					prep.setDate(4, new Date(entry.getPublishedDate().getTime()));
+					prep.setTimestamp(4, new Timestamp(entry.getPublishedDate().getTime()));
 					prep.executeUpdate();
 					//added to the new alerts collection
 					alerts.add(entry.getDescription().getValue());

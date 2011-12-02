@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import utils.FeedReader;
+import account.MasterVTIAccount;
 import account.TrainRouteVTIAccount;
 import account.VTIAccount;
 
@@ -44,7 +45,7 @@ public class VTI {
 		}
         
 		addCTAFeedsAccounts();
-		//addMasterAccount();
+		addMasterAccount();
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
@@ -87,7 +88,7 @@ public class VTI {
 	
 	public void addMasterAccount(){
 		try {
-			vti.put("VTI_Robot", new VTIAccount("VTI_Robot") );
+			vti.put("VTI_Robot", new MasterVTIAccount("VTI_Robot") );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
