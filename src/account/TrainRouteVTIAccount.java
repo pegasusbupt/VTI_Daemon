@@ -19,18 +19,6 @@ public class TrainRouteVTIAccount extends VTIAccount {
 
 	@Override
 	public void run() {
-		BufferedWriter logOut = null;
-		Calendar cal = Calendar.getInstance();
-		try {
-			logOut = new BufferedWriter(new FileWriter("logs/"
-					+ twitter.getScreenName() + ".txt", true));
-		} catch (IllegalStateException e2) {
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		} catch (TwitterException e2) {
-			e2.printStackTrace();
-		}
 		while (true) {
 			List<String> statuses;
 			
@@ -40,34 +28,18 @@ public class TrainRouteVTIAccount extends VTIAccount {
 						.retrieveFeeds("http://www.transitchicago.com/rss/railalertsrss.aspx?RouteId="+FeedReader.route_id.get(twitter.getScreenName().toLowerCase()));
 				// dms = twitter.getDirectMessages();
 				if (statuses.size() > 0) {
-					logOut.write(DateFormat.getDateTimeInstance(
-							DateFormat.FULL, DateFormat.MEDIUM).format(
-							cal.getTime()));
-					logOut.newLine();
 					for (String status : statuses) {
-						logOut.write(status);
-						logOut.newLine();
 						if (status.length() > 140)
 							twitter.updateStatus(StringProcess.messageShorten(status));
-
 					}
-					logOut.newLine();
 				}
 			} catch (TwitterException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 			try {
 				Thread.sleep(1000); // check the received tweets every 1 sec
 			} catch (InterruptedException e) {
-				try {
-					logOut.close();
-				} catch (IOException e1) {
-					
-					e1.printStackTrace();
-				}
 				break;
 			}
 

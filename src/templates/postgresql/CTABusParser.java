@@ -1,4 +1,4 @@
-package templates;
+package templates.postgresql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

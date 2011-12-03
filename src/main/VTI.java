@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import utils.FeedReader;
+import utils.RateMultiServer;
 import account.MasterVTIAccount;
 import account.TrainRouteVTIAccount;
 import account.VTIAccount;
@@ -34,7 +35,7 @@ public class VTI {
 	
 	public void run(String[] args){
 		// default running time equals to minutes
-		long run_time = 1000 * 5;
+		long run_time = 1000 * 100000;
 		if (args.length > 0) {
 			try {
 				run_time = Long.parseLong(args[0]) * 1000;
@@ -44,8 +45,11 @@ public class VTI {
 			}
 		}
         
-		addCTAFeedsAccounts();
-		addMasterAccount();
+		//start the rate multiserver service 
+		new RateMultiServer().start();
+		//addCTAFeedsAccounts();
+		//addMasterAccount();
+		
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();

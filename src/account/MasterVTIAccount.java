@@ -31,7 +31,7 @@ public class MasterVTIAccount extends VTIAccount {
 	// HashMap schema : <"account_name", "coordinateX,coordinateY">
 	private HashMap<String, String> geoAccounts = new HashMap<String, String>();
 	// HashSet schema: <"publication_id">
-	private HashSet<String> existing_publications = new HashSet<String>();
+	private HashSet<Long> existing_publications = new HashSet<Long>();
 
 	public MasterVTIAccount(String screen_name) throws IOException {
 		super(screen_name);
@@ -42,7 +42,7 @@ public class MasterVTIAccount extends VTIAccount {
 			ResultSet rs;
 			rs = stat.executeQuery("select p_id from publications;");
 			while (rs.next()) {
-				existing_publications.add(rs.getString("p_id"));
+				existing_publications.add(rs.getLong("p_id"));
 			}
 
 			rs = stat
@@ -88,7 +88,7 @@ public class MasterVTIAccount extends VTIAccount {
 			stat.setDouble(1, loc.getLatitude());
 			stat.setDouble(2, loc.getLongitude());
 			stat.setString(3, ret);
-			stat.setString(4, String.valueOf(status.getId()));
+			stat.setLong(4, status.getId());
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -108,17 +108,18 @@ public class MasterVTIAccount extends VTIAccount {
 					PreparedStatement stat;
 					for (Status status : statuses) {
 						// if this is a new publication
-						if (!existing_publications.contains(String.valueOf(status.getId()))) {
+						if (!existing_publications.contains(status.getId())) {
 							stat = VTI.conn
-									.prepareStatement("INSERT INTO publications(p_id, publisher, tweet, create_time, fetch_time) VALUES (?, ?, ?, ?, now());");
-							stat.setString(1, String.valueOf(status.getId()));
+									.prepareStatement("INSERT INTO publications(p_id, publisher, tweet, up_votes, down_votes, create_time, fetch_time) VALUES (?, ?, ?, ?, ?, ?, now());");
+							stat.setLong(1, status.getId());
 							stat.setString(2, status.getUser().getName());
 							stat.setString(3, status.getText());
-							stat.setTimestamp(4, new Timestamp(status
+							stat.setInt(4, 0);
+							stat.setInt(5, 0);
+							stat.setTimestamp(6, new Timestamp(status
 									.getCreatedAt().getTime()));
 							stat.executeUpdate();
-							existing_publications.add(String.valueOf(status
-									.getId()));
+							existing_publications.add(status.getId());
 
 							// determine which account this status is assigned
 							// to

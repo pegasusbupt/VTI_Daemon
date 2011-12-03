@@ -1,4 +1,4 @@
-package templates;
+package templates.postgresql;
 
 import java.sql.*;
 import java.util.HashSet;
