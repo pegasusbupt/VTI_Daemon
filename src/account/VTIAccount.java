@@ -53,6 +53,7 @@ public class VTIAccount implements Runnable {
 				// rs.getString("accessTokenSecret"));
 			}
 			rs.close();
+			stat.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
