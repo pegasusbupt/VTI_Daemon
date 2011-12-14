@@ -1,0 +1,23 @@
+N_S_ Bounds:
+Harlem
+Cicero
+Pulaski
+Kedzie
+Western
+Ashland
+Halsted
+State
+Michigan
+Lake_Shore
+
+E_W_ Bounds:
+Touhy
+Lawrence
+Belmont
+North
+Madison
+Roosevelt
+Cermak
+31st
+47th
+63rd

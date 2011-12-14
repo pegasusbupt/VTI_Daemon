@@ -64,6 +64,7 @@ public class BuildTrainStationLocaitonTable {
 				prep.setInt(9, Integer.parseInt(fields[6]));
 				prep.executeUpdate();
 			}
+			prep.close();
 		} catch (Exception e) {
 				e.printStackTrace();
 		}
@@ -106,7 +107,7 @@ public class BuildTrainStationLocaitonTable {
 				prep.setInt(3, Integer.parseInt(s));
 				prep.executeUpdate();
 			}
-			
+			prep.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

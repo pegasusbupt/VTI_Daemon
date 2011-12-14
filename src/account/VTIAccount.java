@@ -111,7 +111,8 @@ public class VTIAccount implements Runnable {
 							Desktop.getDesktop()
 									.browse(new URI(requestToken
 											.getAuthorizationURL()));
-						} catch (IOException ignore) {
+						} catch (IOException e) {
+							e.printStackTrace();
 						} catch (URISyntaxException e) {
 							throw new AssertionError(e);
 						}
@@ -152,6 +153,7 @@ public class VTIAccount implements Runnable {
 					System.out
 							.println("Successfully stored access token to local database.");
 					// System.exit(0);
+					prep.close();
 				} catch (TwitterException te) {
 					te.printStackTrace();
 					System.out.println("Failed to get accessToken: "

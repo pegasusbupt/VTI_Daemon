@@ -35,7 +35,7 @@ public class VTI {
 	
 	public void run(String[] args){
 		// default running time equals to minutes
-		long run_time = 1000 * 100000;
+		long run_time = 1000 * 120;
 		if (args.length > 0) {
 			try {
 				run_time = Long.parseLong(args[0]) * 1000;
@@ -47,7 +47,7 @@ public class VTI {
         
 		//start the rate multiserver service 
 		new RateMultiServer().start();
-		//addCTAFeedsAccounts();
+		addCTAFeedsAccounts();
 		//addMasterAccount();
 		
 
@@ -77,8 +77,7 @@ public class VTI {
 		System.out.println("Run time drains out! Program is termined.");
 		System.out.println("**********************************************************");
 		System.exit(0);
-       
-	}
+ 	}
 	
 	public void addCTAFeedsAccounts(){
 		try {

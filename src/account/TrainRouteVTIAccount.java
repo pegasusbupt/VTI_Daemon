@@ -1,15 +1,10 @@
 package account;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import twitter4j.TwitterException;
 import utils.FeedReader;
-import utils.StringProcess;
 
 public class TrainRouteVTIAccount extends VTIAccount {
 
@@ -30,7 +25,9 @@ public class TrainRouteVTIAccount extends VTIAccount {
 				if (statuses.size() > 0) {
 					for (String status : statuses) {
 						if (status.length() > 140)
-							twitter.updateStatus(StringProcess.messageShorten(status));
+							twitter.updateStatus(status.substring(0,139));
+						else
+							twitter.updateStatus(status);
 					}
 				}
 			} catch (TwitterException e) {

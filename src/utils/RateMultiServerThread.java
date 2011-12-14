@@ -22,18 +22,25 @@ public class RateMultiServerThread extends Thread {
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
-			// a message has a format "p_id+rater_name+up/down"
+			
 			String input = in.readLine();
-			if (input != null) {
-				String[] fields = input.split(",");
-				PreparedStatement stat;
-				if (fields[2].equalsIgnoreCase("up"))
-					stat = VTI.conn
-							.prepareStatement("UPDATE publications SET up_votes=up_votes+1 where p_id=?;");
-				else
-					stat = VTI.conn
-							.prepareStatement("UPDATE publications SET down_votes=down_votes+1 where p_id=?;");
-				stat.setLong(1, Long.parseLong(fields[0]));
+			PreparedStatement stat;
+			StringBuilder feedback=new StringBuilder();
+			if (input != null) {// a feedback message
+				if(input.startsWith("Feedback")){
+					stat = VTI.conn.prepareStatement("insert into feedback values (?, ?, now());");
+					stat.setString(1,in.readLine());
+					while((input=in.readLine())!=null)
+						feedback.append(input);
+					stat.setString(2, feedback.toString());
+				}else{// a message has a format "p_id+rater_name+up/down"
+					String[] fields = input.split(",");
+					if (fields[2].equalsIgnoreCase("up"))
+						stat = VTI.conn.prepareStatement("UPDATE publications SET up_votes=up_votes+1 where p_id=?;");
+					else
+						stat = VTI.conn.prepareStatement("UPDATE publications SET down_votes=down_votes+1 where p_id=?;");
+					stat.setLong(1, Long.parseLong(fields[0]));
+				}
 				stat.executeUpdate();
 				stat.close();
 				in.close();

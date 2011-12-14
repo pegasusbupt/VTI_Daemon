@@ -35,7 +35,10 @@ public class Database {
 				prep.setString(2, values[0]);
 				prep.setString(3, values[1]);
 				prep.executeUpdate();
+				prep.close();
 			}
+			stat.close();
+			conn.close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,6 +78,7 @@ public class Database {
 				System.out.println("job = " + rs.getString("occupation"));
 			}
 			rs.close();
+			stat.close();
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();

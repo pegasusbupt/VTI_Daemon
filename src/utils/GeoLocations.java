@@ -22,6 +22,9 @@ public class GeoLocations {
 	
 	}
 	
+	/*
+	 * @return return distance between two geo points in meters
+	 */
 	public static double distBetween(double lat1, double lng1, double lat2,
 			double lng2) {
 		double dLat = Math.toRadians(lat2 - lat1);
@@ -31,7 +34,7 @@ public class GeoLocations {
 				* Math.cos(Math.toRadians(lat2)) * Math.sin(dLng / 2)
 				* Math.sin(dLng / 2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-		double dist = (EARTHRADIUS) * c;
+		double dist = (EARTHRADIUS*MILETOKM*1.0E3) * c;
 
 		return dist;
 	}

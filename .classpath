@@ -15,5 +15,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="E:/eclipse/workspace/VTI_Daemon/lib/postgresql-9.1-901.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/VTI/lib/jsoup-1.6.1.jar" sourcepath="/VTI/lib/jsoup-1.6.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/VTI/lib/jsoup-1.6.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

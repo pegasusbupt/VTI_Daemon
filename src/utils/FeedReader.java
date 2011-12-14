@@ -56,6 +56,7 @@ public class FeedReader {
 				//System.out.println("alert= " + rs.getString("alert"));
 			}
 			rs.close();
+			stat.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,7 +96,7 @@ public class FeedReader {
 					alerts.add(entry.getDescription().getValue());
 				}
 			}
-
+			prep.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("ERROR: " + ex.getMessage());

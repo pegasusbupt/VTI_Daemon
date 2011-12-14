@@ -1,6 +1,0 @@
-#!/bin/bash
-
-: > ALL_VTI_Accounts.txt
-
-cat Priv/accounts.txt >> ALL_VTI_Accounts.txt
-cat Pub/accounts.txt >> ALL_VTI_Accounts.txt

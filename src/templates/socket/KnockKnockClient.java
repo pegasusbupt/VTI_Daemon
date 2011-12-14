@@ -53,10 +53,10 @@ public class KnockKnockClient {
         }
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String fromServer;
+        String fromServer=stdIn.readLine();
         String fromUser;
 
-        while ((fromServer = in.readLine()) != null) {
+        while (fromServer != null) {
             System.out.println("Server: " + fromServer);
             if (fromServer.equals("Bye."))
                 break;

@@ -22,8 +22,7 @@ public class RateMultiServer extends Thread{
 			//System.out.println(server.getInetAddress());
 			System.out.println(server.getLocalSocketAddress());
 		} catch (IOException e) {
-			System.err.println("Could not listen on port: 243.");
-			System.exit(-1);
+			System.err.println("Could not listen on port: "+PORT);
 		}
 	}
 	
