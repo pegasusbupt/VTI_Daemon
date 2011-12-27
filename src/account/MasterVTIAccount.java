@@ -22,10 +22,11 @@ import utils.GeocodeAdapter;
  * 
  */
 public class MasterVTIAccount extends VTIAccount {
-	private static final int QUERY_FREQUENCY=1000;
+	private static final int QUERY_FREQUENCY=20; //in seconds
 	// HashMap schema : <"account_name", "coordinateX,coordinateY">
-	// geoAccounts represent all train stations
-	private HashMap<String, String> geoAccounts = new HashMap<String, String>();
+	
+	// trainAccounts represent all train stations
+	private HashMap<String, String> trainStationAccounts = new HashMap<String, String>();
 	// HashSet schema: <"publication_id">
 	private HashSet<Long> existing_publications = new HashSet<Long>();
 
@@ -43,7 +44,7 @@ public class MasterVTIAccount extends VTIAccount {
 
 			rs = stat.executeQuery("select longname, latitude, longitude from train_station;");
 			while (rs.next()) {
-				geoAccounts.put(
+				trainStationAccounts.put(
 						rs.getString("longname"),
 						rs.getDouble("latitude") + ","
 								+ rs.getDouble("longitude"));
@@ -57,7 +58,7 @@ public class MasterVTIAccount extends VTIAccount {
 
 	String assignPublication(Status status) {
 		GeoLocation loc = status.getGeoLocation();
-		String ret="";
+		String ret=null;
 		if (loc == null) {
 			System.out.println("\""+status.getText()+"\""
 					+ " is not embeded with location information");
@@ -67,8 +68,8 @@ public class MasterVTIAccount extends VTIAccount {
 			double ln=loc.getLongitude();
 			
 			double minimum=Double.MAX_VALUE;
-			for (String key : geoAccounts.keySet()) {
-				String[] coordinates = geoAccounts.get(key).split(",");
+			for (String key : trainStationAccounts.keySet()) {
+				String[] coordinates = trainStationAccounts.get(key).split(",");
 				double dis = GeoLocations.distBetween(loc.getLatitude(),
 						loc.getLongitude(), Double.parseDouble(coordinates[0]),
 						Double.parseDouble(coordinates[1]));
@@ -82,19 +83,14 @@ public class MasterVTIAccount extends VTIAccount {
 			// if the closest train statin is with 20 meters, then considered the publication is within the station
 			if(minimum>20){
 				// determine the zone to the publication is assigned
-				int row, col;
-				row = (int) ((lat - GeocodeAdapter.SOUTH) * 1.0E6 / GeocodeAdapter.ZONE_LATITUDE);
-				col = (int) ((ln - GeocodeAdapter.WEST) * 1.0E6 / GeocodeAdapter.ZONE_LONGITUDE);
-				System.out.println("vti_zone_" + row + col);
-				if (row >= 0 && row <= 9 && col >= 0 && col <= 9)
-					ret = "vti_zone_" + row + col;
+				ret=GeocodeAdapter.determineVTIAccount(lat, ln);
 			}
 			
 			String address="not available";
 			String tmp;
 			try {
 				PreparedStatement stat = VTI.conn
-						.prepareStatement("UPDATE publications SET latitude=?, longitude=?, vti_account=?, address=? where p_id=?;");
+						.prepareStatement("UPDATE publications SET latitude=?, longitude=?, vti_account=?, address=?, geotagged_text=? where p_id=?;");
 				stat.setDouble(1, loc.getLatitude());
 				stat.setDouble(2, loc.getLongitude());
 				stat.setString(3, ret);
@@ -102,17 +98,18 @@ public class MasterVTIAccount extends VTIAccount {
 				if(tmp!=null) 
 					address=tmp;
 				stat.setString(4, address);
-				stat.setLong(5, status.getId());
+				stat.setString(5, status.getText().toLowerCase().replaceAll("@vti_robot ", "")+" reported from "+address);
+				stat.setLong(6, status.getId());
 				stat.executeUpdate();
 				stat.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-			if(!ret.equals(""))
+			if(ret!=null)
 				return ret+"VTI_BREAK"+address;
 			else 
-				return null;
+				return ret;
 		}
 	}
 	
@@ -126,12 +123,13 @@ public class MasterVTIAccount extends VTIAccount {
 					PreparedStatement stat;
 					for (Status status : statuses) {
 						// if this is a new publication
+					try{
 						if (!existing_publications.contains(status.getId())) {
 							stat = VTI.conn
 									.prepareStatement("INSERT INTO publications(p_id, publisher, tweet, up_votes, down_votes, create_time, fetch_time) VALUES (?, ?, ?, ?, ?, ?, now());");
 							stat.setLong(1, status.getId());
 							stat.setString(2, status.getUser().getName());
-							stat.setString(3, status.getText());
+							stat.setString(3, status.getText().toLowerCase().replaceAll("@vti_robot ", ""));
 							stat.setInt(4, 0);
 							stat.setInt(5, 0);
 							stat.setTimestamp(6, new Timestamp(status
@@ -148,8 +146,9 @@ public class MasterVTIAccount extends VTIAccount {
 							if(ret!=null){
 								fields=ret.split("VTI_BREAK");
 								targetAccount=VTI.vti.get(fields[0]);
- 								System.out.println(targetAccount.getTwitter().getScreenName());
-								msg=status+"at"+fields[1];
+ 								msg=status.getText().toLowerCase().replaceAll("@vti_robot ", "")+" at "+fields[1];
+								System.out.println(targetAccount.getTwitter().getScreenName()+" posted : "+ msg);
+								System.out.println();
 								if(msg.length()<140)
 									targetAccount.twitter.updateStatus(msg);
 								else
@@ -157,13 +156,18 @@ public class MasterVTIAccount extends VTIAccount {
 							}
 						}
 					}
+					catch(Exception e){
+						e.printStackTrace();
+						continue;
+					}
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			} 
+			}catch (Exception e) {
+			e.printStackTrace();
+		}
 
 			try {
-				Thread.sleep(QUERY_FREQUENCY); // check the received tweets every 0.1 sec
+				Thread.sleep(QUERY_FREQUENCY*1000); // check the received tweets every 0.1 sec
 			} catch (InterruptedException e) {
 				break;
 			}

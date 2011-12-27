@@ -161,10 +161,9 @@ public class VTIAccount implements Runnable {
 					System.exit(-1);
 				}
 			}
-			System.out.println("Got access token.");
-			System.out.println("Access token: " + accessToken.getToken());
-			System.out.println("Access token secret: "
-					+ accessToken.getTokenSecret());
+			//System.out.println("Got access token.");
+			//System.out.println("Access token: " + accessToken.getToken());
+			//System.out.println("Access token secret: "+ accessToken.getTokenSecret());
 			System.out.println();
 
 		} catch (Exception e) {

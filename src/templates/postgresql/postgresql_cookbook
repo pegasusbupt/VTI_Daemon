@@ -1,3 +1,5 @@
 ALTER TABLE table RENAME column TO new_column
-ALTER TABLE table ADD column data_type
+ALTER TABLE table ADD columnname data_type
 ALTER TABLE table ALTER COLUMN column TYPE new_type
+ALTER TABLE table DROP CONSTRAINT constraint_name
+ALTER TABLE table ADD CONSTRAINT constraint_name constrain_content

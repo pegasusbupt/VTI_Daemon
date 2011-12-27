@@ -34,11 +34,11 @@ public class VTI {
 	}
 	
 	public void run(String[] args){
-		// default running time equals to minutes
-		long run_time = 1000 * 120;
+		// running time in minutes
+		long run_time = (1000 * 60 )*  2;
 		if (args.length > 0) {
 			try {
-				run_time = Long.parseLong(args[0]) * 1000;
+				run_time = Long.parseLong(args[0]) * 1000 * 60;
 			} catch (NumberFormatException e) {
 				System.out.println("The first parameter is not a number");
 				System.exit(1);
@@ -48,8 +48,8 @@ public class VTI {
 		//start the rate multiserver service 
 		new RateMultiServer().start();
 		addCTAFeedsAccounts();
-		//addMasterAccount();
-		
+		addMasterAccount();
+		addZoneAccount();
 
 		// for each account, start monitoring statuses
 		long start_time=System.currentTimeMillis();
@@ -60,8 +60,9 @@ public class VTI {
 			t.start();
 		}
 	    
-	    //while(true){
-		while(System.currentTimeMillis()-start_time<run_time){
+		boolean condition=true;
+	    while(condition){
+		//while(System.currentTimeMillis()-start_time<run_time){
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -92,6 +93,19 @@ public class VTI {
 	public void addMasterAccount(){
 		try {
 			vti.put("VTI_Robot", new MasterVTIAccount("VTI_Robot") );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addZoneAccount(){
+		int i;
+		try {
+			for(i=0;i<25;i++)
+				if(i<10)
+					vti.put("vti_zone_0"+i, new MasterVTIAccount("vti_zone_0"+i) );
+				else
+					vti.put("vti_zone_"+i, new MasterVTIAccount("vti_zone_"+i) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
