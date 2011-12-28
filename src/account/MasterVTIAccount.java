@@ -23,7 +23,7 @@ import utils.StringProcess;
  * 
  */
 public class MasterVTIAccount extends VTIAccount {
-	private static final int QUERY_FREQUENCY=20; //in seconds
+	private static final int QUERY_FREQUENCY=1; //in seconds
 	// HashMap schema : <"account_name", "coordinateX,coordinateY">
 	
 	// trainAccounts represent all train stations
@@ -166,7 +166,7 @@ public class MasterVTIAccount extends VTIAccount {
 			}catch (Exception e) {
 				try {
 					stat = VTI.conn
-							.prepareStatement("INSERT INTO logs(log, type, create_time) VALUES (?, ?, now());");
+							.prepareStatement("INSERT INTO logs(logtext, logtype, create_time) VALUES (?, ?, now());");
 					stat.setString(1, StringProcess.stack2string(e));
 					stat.setString(2, "vti_robot getMentions()");
 					stat.executeUpdate();
