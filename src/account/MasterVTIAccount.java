@@ -15,6 +15,7 @@ import twitter4j.GeoLocation;
 import twitter4j.Status;
 import utils.GeoLocations;
 import utils.GeocodeAdapter;
+import utils.StringProcess;
 
 /**
  * @author Sol Ma
@@ -117,10 +118,10 @@ public class MasterVTIAccount extends VTIAccount {
 	public void run() {
 		while (true) {
 			List<Status> statuses;
+			PreparedStatement stat;
 			try {
 				statuses = twitter.getMentions();
 				if (statuses.size() > 0) {
-					PreparedStatement stat;
 					for (Status status : statuses) {
 						// if this is a new publication
 					try{
@@ -146,7 +147,7 @@ public class MasterVTIAccount extends VTIAccount {
 							if(ret!=null){
 								fields=ret.split("VTI_BREAK");
 								targetAccount=VTI.vti.get(fields[0]);
- 								msg=status.getText().toLowerCase().replaceAll("@vti_robot ", "")+" at "+fields[1];
+ 								msg=status.getText().toLowerCase().replaceAll("@vti_robot ", "")+" reported from "+fields[1];
 								System.out.println(targetAccount.getTwitter().getScreenName()+" posted : "+ msg);
 								System.out.println();
 								if(msg.length()<140)
@@ -163,7 +164,15 @@ public class MasterVTIAccount extends VTIAccount {
 				}
 			} 
 			}catch (Exception e) {
-			e.printStackTrace();
+				try {
+					stat = VTI.conn
+							.prepareStatement("INSERT INTO logs(log, type, create_time) VALUES (?, ?, now());");
+					stat.setString(1, StringProcess.stack2string(e));
+					stat.setString(2, "vti_robot getMentions()");
+					stat.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 		}
 
 			try {
