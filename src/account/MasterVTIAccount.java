@@ -23,7 +23,7 @@ import utils.StringProcess;
  * 
  */
 public class MasterVTIAccount extends VTIAccount {
-	private static final int QUERY_FREQUENCY=1; //in seconds
+	private static final int QUERY_FREQUENCY=20; //in seconds
 	// HashMap schema : <"account_name", "coordinateX,coordinateY">
 	
 	// trainAccounts represent all train stations

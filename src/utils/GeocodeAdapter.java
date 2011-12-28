@@ -9,8 +9,8 @@ public class GeocodeAdapter {
 	private static final String WEST_SOUTH="4700 S Pulaski Road Chicago";
 	private static final String NORTH="Irving Park road and North Lake Shore Chicago";
 	private static final String EAST="Navy Pier Chicago";
-	private static final int ZONE_NUM=10;
 	
+	public static final int ZONE_NUM=10;
 	public static final double ZONE_LATITUDE=14688.169999999553;
 	public static final double ZONE_LONGITUDE=11434.390000000596;
 	public static final double WEST=-87.7239589;

@@ -47,7 +47,7 @@ public class VTI {
         
 		//start the rate multiserver service 
 		new RateMultiServer().start();
-		addCTAFeedsAccounts();
+		addTrainRoutesAccounts();
 		addMasterAccount();
 		addZoneAccount();
 
@@ -80,7 +80,7 @@ public class VTI {
 		System.exit(0);
  	}
 	
-	public void addCTAFeedsAccounts(){
+	public void addTrainRoutesAccounts(){
 		try {
 			for(String route: FeedReader.route_id.keySet()){
 				vti.put(route, new TrainRouteVTIAccount(route) );
