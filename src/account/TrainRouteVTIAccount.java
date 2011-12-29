@@ -7,7 +7,8 @@ import twitter4j.TwitterException;
 import utils.FeedReader;
 
 public class TrainRouteVTIAccount extends VTIAccount {
-
+	private static final long frequency=5;  //in minute;
+		
 	public TrainRouteVTIAccount(String screen_name) throws IOException {
 		super(screen_name);
 	}
@@ -35,7 +36,7 @@ public class TrainRouteVTIAccount extends VTIAccount {
 			}
 
 			try {
-				Thread.sleep(1000); // check the received tweets every 1 sec
+				Thread.sleep(frequency*1000*60); //
 			} catch (InterruptedException e) {
 				break;
 			}
