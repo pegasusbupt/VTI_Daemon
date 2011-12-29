@@ -32,7 +32,7 @@ public class GeocodeAdapter {
 	public static GeoLocation geocode(String address){
 		double [] laln=new double[2];
 		String url="http://maps.googleapis.com/maps/api/geocode/xml?address="+address+"&sensor=true";
-		System.out.println(url);
+		//System.out.println(url);
 		try {
 			Document doc=Jsoup.connect(url).get();
 			laln[0]=Double.parseDouble(doc.select("result > geometry > location > lat").first().text());
@@ -53,7 +53,7 @@ public class GeocodeAdapter {
 		row=(int) ((lat-SOUTH)*1.0E6/ZONE_LATITUDE/2);
 		col=(int) ((ln-WEST)*1.0E6/ZONE_LONGITUDE/2);
 		zoneId=row*5+col;
-		System.out.println("belongs to account:  vti_zone_"+zoneId+"   (row="+row+",col="+col+")");
+		//System.out.println("belongs to account:  vti_zone_"+zoneId+"   (row="+row+",col="+col+")");
 		if(zoneId<25&&zoneId>=0)
 			if(zoneId<10) return "vti_zone_0"+zoneId;
 			else return "vti_zone_"+zoneId;

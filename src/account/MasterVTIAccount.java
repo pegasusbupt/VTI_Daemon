@@ -140,7 +140,7 @@ public class MasterVTIAccount extends VTIAccount {
 
 							// determine which account this status is assigned to
 							String ret = assignPublication(status);
-							System.out.println(ret);
+							//System.out.println(ret);
 							VTIAccount targetAccount=null;
 							String msg;
 							String [] fields;
