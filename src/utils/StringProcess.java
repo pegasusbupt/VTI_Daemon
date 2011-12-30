@@ -14,4 +14,8 @@ public class StringProcess {
 			return "bad stack2string, exception info. lost.";
 		}
 	}
+	
+	public static String shortenTrainAlerts(String alert){
+		return alert.replaceAll("2012 ", "").substring(0, 139);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import twitter4j.TwitterException;
 import utils.FeedReader;
+import utils.StringProcess;
 
 public class TrainRouteVTIAccount extends VTIAccount {
 	private static final long frequency=5;  //in minute;
@@ -17,7 +18,6 @@ public class TrainRouteVTIAccount extends VTIAccount {
 	public void run() {
 		while (true) {
 			List<String> statuses;
-			
 			try {
 				//System.out.println(FeedReader.route_id.get(twitter.getScreenName().toLowerCase())+"  "+twitter.getScreenName().toLowerCase());
 				statuses = FeedReader
@@ -26,7 +26,7 @@ public class TrainRouteVTIAccount extends VTIAccount {
 				if (statuses.size() > 0) {
 					for (String status : statuses) {
 						if (status.length() > 140)
-							twitter.updateStatus(status.substring(0,139));
+							twitter.updateStatus(StringProcess.shortenTrainAlerts(status));
 						else
 							twitter.updateStatus(status);
 					}
