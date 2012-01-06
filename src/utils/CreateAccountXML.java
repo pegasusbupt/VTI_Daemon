@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
@@ -20,7 +21,7 @@ public class CreateAccountXML {
 	
 	void main(){
 		//System.out.println(readServerIP());
-		//createAccountXML();
+		createAccountXML();
 		parseAccountXML();
 	}
 	
@@ -40,6 +41,8 @@ public class CreateAccountXML {
 	}
 	
 	public static void createAccountXML(){
+		final String trainRouteAccDesc="This account posts scheduled alerts related to the associated train route. Data is fetched from CTA RSS feeds in real-time.";
+		final String zoneAccDesc="This account posts user generated publications that are reported within the area defined by its associated coordinates.";
 		String file = "data\\accounts\\accounts.xml";
 		Document doc = DocumentFactory.getInstance().createDocument();
 		Element root = doc.addElement("accounts");
@@ -60,6 +63,8 @@ public class CreateAccountXML {
 			col=i%(GeocodeAdapter.ZONE_NUM/2);
 			elem = account.addElement("type");
 			elem.addText("zone");
+			elem = account.addElement("description");
+			elem.setText(zoneAccDesc);
 			parent = account.addElement("southwest");
 			elem = parent.addElement("lat");
 			coord=(float)((GeocodeAdapter.SOUTH*1.0E6+row*GeocodeAdapter.ZONE_LATITUDE)/1.0E6);
@@ -74,6 +79,8 @@ public class CreateAccountXML {
 			elem = parent.addElement("lng");
 			coord=(float)((GeocodeAdapter.WEST*1.0E6+(col+1)*GeocodeAdapter.ZONE_LONGITUDE)/1.0E6);
 			elem.setText(String.valueOf(coord));
+			elem = account.addElement("area");
+			elem.setText("2 miles * 2 miles");
 		}
 
 		/**
@@ -85,6 +92,8 @@ public class CreateAccountXML {
 			elem.setText(route);
 			elem = account.addElement("type");
 			elem.addText("train_route");
+			elem = account.addElement("description");
+			elem.setText(trainRouteAccDesc);
 		}
 		
 		/**
@@ -104,14 +113,30 @@ public class CreateAccountXML {
 	
 	public static void parseAccountXML(){
 		org.jsoup.nodes.Document doc;
-		int i;
+		HashMap<String,String> ret=new HashMap<String,String>();
+		int i,j;
 		try {
-			doc = Jsoup.connect("http://www2.cs.uic.edu/~sma/VTI/accounts.xml").get();
-			org.jsoup.select.Elements accounts = doc.select("account > name");
-			// System.out.println(Jsoup.parse(directions.html()));
+			doc = Jsoup.connect("http://cs.uic.edu/~sma/VTI/accounts.xml").get();
+			org.jsoup.select.Elements accounts = doc.select("account");
+			StringBuilder details=new StringBuilder();
 			for(i=0;i<accounts.size();i++) {
-				System.out.println(accounts.get(i).text());
+				details.delete(0, details.length());
+				org.jsoup.select.Elements childrenEles=accounts.get(i).children();
+				for(j=0;j<childrenEles.size();j++){
+					String tagName=childrenEles.get(j).tagName();
+					if(tagName.equals("southwest")||tagName.equals("northeast")){
+						String coords=childrenEles.get(j).select("lat").text()+" , "+childrenEles.get(j).select("lng").text();
+						details.append(tagName+" : "+coords+"\n");
+					}
+					else
+						details.append(tagName+" : "+childrenEles.get(j).text()+"\n");
+				}
+				//System.out.println(account);
+				ret.put(childrenEles.get(0).text(), details.toString());
 			}
+			System.out.println();
+			for(String key: ret.keySet())
+				System.out.println(key+"\n"+ret.get(key));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
