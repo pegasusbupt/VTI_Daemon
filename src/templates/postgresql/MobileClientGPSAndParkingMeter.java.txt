@@ -24,7 +24,7 @@ public class MobileClientGPSAndParkingMeter {
 		MobileClientGPSAndParkingMeter runner = new MobileClientGPSAndParkingMeter();
 		//uic lat lon 41.872533,-87.646909
 		//home 41.8555619,-87.65315
-		System.out.println("lowest dist "+ runner.run(41.883533,-87.646909,"none","none"));
+		Log.println("lowest dist "+ runner.run(41.883533,-87.646909,"none","none"));
 
 	}
 	
@@ -130,7 +130,7 @@ public class MobileClientGPSAndParkingMeter {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		System.out.println("Closest parking meter is "+parkingmeterid+" at "+parkingmeteraddress+" it is "+lowest_distance+"m away");
+		Log.println("Closest parking meter is "+parkingmeterid+" at "+parkingmeteraddress+" it is "+lowest_distance+"m away");
 		return lowest_distance;
 		
 

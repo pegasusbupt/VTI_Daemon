@@ -15,6 +15,7 @@ import twitter4j.GeoLocation;
 import twitter4j.Status;
 import utils.GeoLocations;
 import utils.GeocodeAdapter;
+import utils.Log;
 import utils.StringProcess;
 
 /**
@@ -61,7 +62,7 @@ public class MasterVTIAccount extends VTIAccount {
 		GeoLocation loc = status.getGeoLocation();
 		String ret=null;
 		if (loc == null) {
-			System.out.println("\""+status.getText()+"\""
+			Log.println("\""+status.getText()+"\""
 					+ " is not embeded with location information");
 			return null;
 		}else{
@@ -79,7 +80,7 @@ public class MasterVTIAccount extends VTIAccount {
 					ret = key;
 				}
 			}
-			System.out.println(ret + " is the closest station to " + "\"" + status.getText() + "\" distance is "+ minimum);
+			Log.println(ret + " is the closest station to " + "\"" + status.getText() + "\" distance is "+ minimum);
 			
 			// if the closest train statin is with 20 meters, then considered the publication is within the station
 			if(minimum>20){
@@ -140,7 +141,7 @@ public class MasterVTIAccount extends VTIAccount {
 
 							// determine which account this status is assigned to
 							String ret = assignPublication(status);
-							//System.out.println(ret);
+							//Log.println(ret);
 							VTIAccount targetAccount=null;
 							String msg;
 							String [] fields;
@@ -148,8 +149,8 @@ public class MasterVTIAccount extends VTIAccount {
 								fields=ret.split("VTI_BREAK");
 								targetAccount=VTI.vti.get(fields[0]);
  								msg=status.getText().toLowerCase().replaceAll("@vti_robot ", "")+" reported from "+fields[1];
-								System.out.println(targetAccount.getTwitter().getScreenName()+" posted : "+ msg);
-								System.out.println();
+								Log.println(targetAccount.getTwitter().getScreenName()+" posted : "+ msg);
+								Log.println();
 								if(msg.length()<140)
 									targetAccount.twitter.updateStatus(msg);
 								else

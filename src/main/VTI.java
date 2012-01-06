@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import utils.FeedReader;
+import utils.Log;
 import utils.RateMultiServer;
 import account.MasterVTIAccount;
 import account.TrainRouteVTIAccount;
@@ -40,7 +41,7 @@ public class VTI {
 			try {
 				run_time = Long.parseLong(args[0]) * 1000 * 60;
 			} catch (NumberFormatException e) {
-				System.out.println("The first parameter is not a number");
+				Log.println("The first parameter is not a number");
 				System.exit(1);
 			}
 		}
@@ -74,9 +75,9 @@ public class VTI {
 		for( Thread t: threads)
 			t.interrupt();
 		
-		System.out.println("**********************************************************");
-		System.out.println("Run time drains out! Program is termined.");
-		System.out.println("**********************************************************");
+		Log.println("**********************************************************");
+		Log.println("Run time drains out! Program is termined.");
+		Log.println("**********************************************************");
 		System.exit(0);
  	}
 	

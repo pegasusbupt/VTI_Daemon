@@ -25,7 +25,7 @@ public class RateClient {
 	        //TODO: SoTimeOut does not work here, why?
 	    /* 
         while (in.readLine() != null);
-	        System.out.println("after blocking read");
+	        Log.println("after blocking read");
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             String ud=new Scanner(System.in).nextLine();
             out.print("138504424040562690,Sol,"+ud);
@@ -83,7 +83,7 @@ public class RateClient {
 	        //TODO: SoTimeOut does not work here, why?
 	     
 	        while (in.readLine() != null);
-	        System.out.println("after blocking read");
+	        Log.println("after blocking read");
            out = new PrintWriter(clientSocket.getOutputStream(), true);
            String ud=new Scanner(System.in).nextLine();
            out.print("138504424040562690,Sol,"+ud);
@@ -99,7 +99,7 @@ public class RateClient {
        } 
 
         for(int i=0;i<100;i++);
-        	System.out.println("Go on");
+        Log.println("Go on");
         	
     }
 }

@@ -1,5 +1,7 @@
 package templates.geo;
 
+import utils.Log;
+
 public class GeoLocationService {
 	
 	private static double EARTH_RADIUS_KM=6371.009;
@@ -7,8 +9,8 @@ public class GeoLocationService {
 	public static void main(String[] args) {
 		Point p1 = new Point(1.723411, 178.2708026);
 		for (Point point : getExtremePointsFrom(p1, 300.00)) {
-			System.out.println("Extreme Point : " + point);
-			System.out.println("Distance from point  : "
+			Log.println("Extreme Point : " + point);
+			Log.println("Distance from point  : "
 					+ getDistanceBetweenPoints(p1, point, "K"));
 		}
 

@@ -20,7 +20,7 @@ public class CreateAccountXML {
 	}
 	
 	void main(){
-		//System.out.println(readServerIP());
+		//Log.println(readServerIP());
 		createAccountXML();
 		parseAccountXML();
 	}
@@ -42,7 +42,8 @@ public class CreateAccountXML {
 	
 	public static void createAccountXML(){
 		final String trainRouteAccDesc="This account posts scheduled alerts related to the associated train route. Data is fetched from CTA RSS feeds in real-time.";
-		final String zoneAccDesc="This account posts user generated publications that are reported within the area defined by its associated coordinates.";
+		final String zoneArea="2 miles * 2 miles";
+		final String zoneAccDesc="This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.";
 		String file = "data\\accounts\\accounts.xml";
 		Document doc = DocumentFactory.getInstance().createDocument();
 		Element root = doc.addElement("accounts");
@@ -79,8 +80,6 @@ public class CreateAccountXML {
 			elem = parent.addElement("lng");
 			coord=(float)((GeocodeAdapter.WEST*1.0E6+(col+1)*GeocodeAdapter.ZONE_LONGITUDE)/1.0E6);
 			elem.setText(String.valueOf(coord));
-			elem = account.addElement("area");
-			elem.setText("2 miles * 2 miles");
 		}
 
 		/**
@@ -123,20 +122,23 @@ public class CreateAccountXML {
 				details.delete(0, details.length());
 				org.jsoup.select.Elements childrenEles=accounts.get(i).children();
 				for(j=0;j<childrenEles.size();j++){
-					String tagName=childrenEles.get(j).tagName();
+					org.jsoup.nodes.Element ele=childrenEles.get(j);
+					String tagName=ele.tagName();
 					if(tagName.equals("southwest")||tagName.equals("northeast")){
-						String coords=childrenEles.get(j).select("lat").text()+" , "+childrenEles.get(j).select("lng").text();
+						String coords=ele.select("lat").text()+" , "+ele.select("lng").text();
 						details.append(tagName+" : "+coords+"\n");
 					}
-					else
-						details.append(tagName+" : "+childrenEles.get(j).text()+"\n");
+					else{
+						details.append(tagName+" : "+ele.text()+"\n");
+					}
 				}
-				//System.out.println(account);
+				//Log.println(account);
 				ret.put(childrenEles.get(0).text(), details.toString());
+				//ret.put(childrenEles.get(0).text(), accounts.get(i).html());
 			}
-			System.out.println();
+			Log.println();
 			for(String key: ret.keySet())
-				System.out.println(key+"\n"+ret.get(key));
+				Log.println(key+"\n"+ret.get(key));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,6 +25,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
+import utils.Log;
 
 /**
  * 
@@ -46,10 +47,10 @@ public class VTIAccount implements Runnable {
 						rs.getString("username"),
 						rs.getString("accessToken") + " "
 								+ rs.getString("accessTokenSecret"));
-				// System.out.println("username = " + rs.getString("username"));
-				// System.out.println("accessToken = "+
+				// Log.println("username = " + rs.getString("username"));
+				// Log.println("accessToken = "+
 				// rs.getString("accessToken"));
-				// System.out.println("accessTokenSecret = "+
+				// Log.println("accessTokenSecret = "+
 				// rs.getString("accessTokenSecret"));
 			}
 			rs.close();
@@ -82,7 +83,7 @@ public class VTIAccount implements Runnable {
 								.setOAuthAccessTokenSecret(values[1]).build());
 				twitter = tf.getInstance();
 				accessToken = twitter.getOAuthAccessToken();
-				System.out
+				Log
 						.println(screen_name
 								+ " has alreay authorized VTI, retrieve access token from local database");
 			} else { // the user has not authorized VTI yet,add it to the
@@ -93,10 +94,10 @@ public class VTIAccount implements Runnable {
 							VTI.VTI_CONSUMER_SECRET);
 
 					RequestToken requestToken = twitter.getOAuthRequestToken();
-					System.out.println("Got request token.");
-					System.out.println("Request token: "
+					Log.println("Got request token.");
+					Log.println("Request token: "
 							+ requestToken.getToken());
-					System.out.println("Request token secret: "
+					Log.println("Request token secret: "
 							+ requestToken.getTokenSecret());
 
 					accessToken = null;
@@ -104,9 +105,9 @@ public class VTIAccount implements Runnable {
 							new InputStreamReader(System.in));
 
 					while (null == accessToken) {
-						System.out
+						Log
 								.println("Open the following URL and grant access to your account:");
-						System.out.println(requestToken.getAuthorizationURL());
+						Log.println(requestToken.getAuthorizationURL());
 						try {
 							Desktop.getDesktop()
 									.browse(new URI(requestToken
@@ -116,7 +117,7 @@ public class VTIAccount implements Runnable {
 						} catch (URISyntaxException e) {
 							throw new AssertionError(e);
 						}
-						System.out
+						Log
 								.print("Enter the PIN(if available) and hit enter after you granted access.[PIN]:");
 						String pin = br.readLine();
 						try {
@@ -129,7 +130,7 @@ public class VTIAccount implements Runnable {
 							}
 						} catch (TwitterException te) {
 							if (401 == te.getStatusCode()) {
-								System.out
+								Log
 										.println("Unable to get the access token.");
 							} else {
 								te.printStackTrace();
@@ -150,21 +151,21 @@ public class VTIAccount implements Runnable {
 							accessToken.getToken() + " "
 									+ accessToken.getTokenSecret());
 
-					System.out
+					Log
 							.println("Successfully stored access token to local database.");
 					// System.exit(0);
 					prep.close();
 				} catch (TwitterException te) {
 					te.printStackTrace();
-					System.out.println("Failed to get accessToken: "
+					Log.println("Failed to get accessToken: "
 							+ te.getMessage());
 					System.exit(-1);
 				}
 			}
-			//System.out.println("Got access token.");
-			//System.out.println("Access token: " + accessToken.getToken());
-			//System.out.println("Access token secret: "+ accessToken.getTokenSecret());
-			System.out.println();
+			//Log.println("Got access token.");
+			//Log.println("Access token: " + accessToken.getToken());
+			//Log.println("Access token secret: "+ accessToken.getTokenSecret());
+			Log.println();
 
 		} catch (Exception e) {
 			e.printStackTrace();

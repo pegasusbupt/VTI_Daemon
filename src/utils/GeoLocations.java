@@ -17,8 +17,8 @@ public class GeoLocations {
 	private static double MILETOKM=1.609344;
 	
 	public static void main(String[] args){
-		System.out.println(distBetween(-87.776785, 41.870886,-87.774135 , 41.887293));
-		System.out.println(distBetween(-87.776785, 41.870886,-87.783661, 41.887159));
+		Log.println(distBetween(-87.776785, 41.870886,-87.774135 , 41.887293));
+		Log.println(distBetween(-87.776785, 41.870886,-87.783661, 41.887159));
 	
 	}
 	

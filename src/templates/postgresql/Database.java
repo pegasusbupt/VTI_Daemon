@@ -3,6 +3,8 @@ package templates.postgresql;
 import java.sql.*;
 import java.util.HashSet;
 
+import utils.Log;
+
 public class Database {
 	public static void main(String[] args){
         new Database().main();	
@@ -23,9 +25,9 @@ public class Database {
 			HashSet<String> existing_users=new HashSet<String>();
 			while (rs.next()) {
 				existing_users.add(rs.getString("username"));
-				System.out.println("username = " + rs.getString("username"));
-				System.out.println("accessToken = " + rs.getString("accessToken"));
-				System.out.println("accessTokenSecret = " + rs.getString("accessTokenSecret"));
+				Log.println("username = " + rs.getString("username"));
+				Log.println("accessToken = " + rs.getString("accessToken"));
+				Log.println("accessTokenSecret = " + rs.getString("accessTokenSecret"));
 			}
 			rs.close();
 			if(!existing_users.contains(user)){
@@ -74,8 +76,8 @@ public class Database {
 
 			ResultSet rs = stat.executeQuery("select * from people;");
 			while (rs.next()) {
-				System.out.println("name = " + rs.getString("name"));
-				System.out.println("job = " + rs.getString("occupation"));
+				Log.println("name = " + rs.getString("name"));
+				Log.println("job = " + rs.getString("occupation"));
 			}
 			rs.close();
 			stat.close();

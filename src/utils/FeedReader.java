@@ -51,9 +51,9 @@ public class FeedReader {
 						rs.getString("route_id") + " "
 								+ rs.getString("alert_id"),
 						rs.getString("alert"));
-				//System.out.println("route_id = " + rs.getString("route_id"));
-				//System.out.println("alert_id = " + rs.getString("alert_id"));
-				//System.out.println("alert= " + rs.getString("alert"));
+				//Log.println("route_id = " + rs.getString("route_id"));
+				//Log.println("alert_id = " + rs.getString("alert_id"));
+				//Log.println("alert= " + rs.getString("alert"));
 			}
 			rs.close();
 			stat.close();
@@ -68,7 +68,7 @@ public class FeedReader {
 		try {
 			URL feedUrl = new URL(url);
 			String routeId = url.substring(url.lastIndexOf('=') + 1);
-			// System.out.println(routeId);
+			// Log.println(routeId);
 			
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = input.build(new XmlReader(feedUrl));
@@ -84,7 +84,7 @@ public class FeedReader {
 				String alertId = link.substring(link.lastIndexOf('=') + 1);
 				// is a new alert
 				if (!existing_alerts.containsKey(routeId + " " + alertId)) {
-					// System.out.println(entry.getDescription().getValue());
+					// Log.println(entry.getDescription().getValue());
 					existing_alerts.put(routeId + " " + alertId, entry
 							.getDescription().getValue());
 					prep.setInt(1, Integer.parseInt(alertId));
@@ -99,7 +99,7 @@ public class FeedReader {
 			prep.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println("ERROR: " + ex.getMessage());
+			Log.println("ERROR: " + ex.getMessage());
 		}
 
 		return alerts;

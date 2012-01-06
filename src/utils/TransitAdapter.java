@@ -29,11 +29,11 @@ public class TransitAdapter {
 		for(String route: routes){
 			stations=new TransitRoute(route).getTransferStations();
 			for(String station: stations){
-				System.out.println(station);
-				System.out.println(GeocodeAdapter.reverseGeocode(GeocodeAdapter.geocode(stationStringFormat(station))));
-				System.out.println();
+				Log.println(station);
+				Log.println(GeocodeAdapter.reverseGeocode(GeocodeAdapter.geocode(stationStringFormat(station))));
+				Log.println();
 			}
-			System.out.println("*******************");
+			Log.println("*******************");
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class TransitAdapter {
 			String tmp=stationName;
 			//remove the color name in the station name: e.g. Addision-Blue->Addision
 			for(int i=0;i<colors.length;i++){
-				//System.out.println(stationName+ "   "+ colors[i] );
+				//Log.println(stationName+ "   "+ colors[i] );
 				if(stationName.contains(colors[i])){
 					stationName=stationName.replaceAll(colors[i], "");
 					break;
@@ -57,9 +57,9 @@ public class TransitAdapter {
 			}
 			tmp="vti_"+tmp.replaceAll("-", "_").replaceAll("/","_").replaceAll(" ","_");
 			if(tmp.length()>20)
-				System.out.println(tmp.substring(0,20));
+				Log.println(tmp.substring(0,20));
 			else
-				System.out.println(tmp);
+				Log.println(tmp);
 			return routeId.replaceAll(" ","+")+"+"+stationName+"+Chicago";
 		}
 		// a bus station name
@@ -105,10 +105,10 @@ public class TransitAdapter {
 		try {
 			doc = Jsoup.connect(tmp.toString()).get();
 			Element directions = doc.select("p").get(2);
-			// System.out.println(Jsoup.parse(directions.html()));
+			// Log.println(Jsoup.parse(directions.html()));
 			Document doc1 = Jsoup.parse(Jsoup.parse(directions.html())
 					.toString().replaceAll("<br />", delimiter));
-			// System.out.println(doc1);
+			// Log.println(doc1);
 			String[] steps = doc1.text().split(delimiter);
 			for (i=0;i<steps.length;i++) {
 				if (steps[i].startsWith(" Alternative routes:"))
@@ -124,7 +124,7 @@ public class TransitAdapter {
 		}
 		// save the first route
 		StringBuilder firstRoute=new StringBuilder(route);
-		//System.out.println(routeTravelTime.size());
+		//Log.println(routeTravelTime.size());
 		
 		//fetch the alternative routes
 		int numberofAlternativeRoutes=routeTravelTime.size(), j;
@@ -137,13 +137,13 @@ public class TransitAdapter {
 			try {
 				doc = Jsoup.connect(tmp.toString()).get();
 				Element directions = doc.select("p").get(2);
-				// System.out.println(Jsoup.parse(directions.html()));
+				// Log.println(Jsoup.parse(directions.html()));
 				Document doc1 = Jsoup.parse(Jsoup.parse(directions.html())
 						.toString().replaceAll("<br />", "delimiter"));
-				// System.out.println(doc1);
+				// Log.println(doc1);
 				String[] steps = doc1.text().split("delimiter");
 				for (j=0; j<steps.length;j++) {
-					//System.out.println(steps[j]);
+					//Log.println(steps[j]);
 					if (steps[j].startsWith(" Alternative routes:")) break;
 					route.append(steps[j].trim() + "\n");
 				}
@@ -181,7 +181,7 @@ class TransitRoute{
 		StringBuilder modes=new StringBuilder();
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i];
-			//System.out.println(line + "   "+ routeId + "  "+ count);
+			//Log.println(line + "   "+ routeId + "  "+ count);
 			if(line.startsWith("Bus")) modes.append("Bus ");
 			if(line.startsWith("Subway")) modes.append("Subway ");
 			if(line.startsWith("Walk")) modes.append("Walk ");
@@ -198,8 +198,8 @@ class TransitRoute{
 			}
 		}
 		modeSequence=modes.toString();
-		//System.out.println(transferStations);
-		//System.out.println();
+		//Log.println(transferStations);
+		//Log.println();
 	}
 	
 	public ArrayList<String> getTransferStations(){

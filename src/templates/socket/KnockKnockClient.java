@@ -33,6 +33,8 @@ package templates.socket;
 import java.io.*;
 import java.net.*;
 
+import utils.Log;
+
 public class KnockKnockClient {
     public static void main(String[] args) throws IOException {
         final String server="localhost";
@@ -57,13 +59,13 @@ public class KnockKnockClient {
         String fromUser;
 
         while (fromServer != null) {
-            System.out.println("Server: " + fromServer);
+        	Log.println("Server: " + fromServer);
             if (fromServer.equals("Bye."))
                 break;
 		    
             fromUser = stdIn.readLine();
 	    if (fromUser != null) {
-                System.out.println("Client: " + fromUser);
+	    	Log.println("Client: " + fromUser);
                 out.println(fromUser);
 	    }
         }

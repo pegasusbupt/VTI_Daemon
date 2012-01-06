@@ -32,7 +32,7 @@ public class GeocodeAdapter {
 	public static GeoLocation geocode(String address){
 		double [] laln=new double[2];
 		String url="http://maps.googleapis.com/maps/api/geocode/xml?address="+address+"&sensor=true";
-		//System.out.println(url);
+		//Log.println(url);
 		try {
 			Document doc=Jsoup.connect(url).get();
 			laln[0]=Double.parseDouble(doc.select("result > geometry > location > lat").first().text());
@@ -40,7 +40,7 @@ public class GeocodeAdapter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//System.out.println(laln[0]+"   "+laln[1]);
+		//Log.println(laln[0]+"   "+laln[1]);
 		return new GeoLocation(laln[0], laln[1]);
 	}
 	
@@ -53,7 +53,7 @@ public class GeocodeAdapter {
 		row=(int) ((lat-SOUTH)*1.0E6/ZONE_LATITUDE/2);
 		col=(int) ((ln-WEST)*1.0E6/ZONE_LONGITUDE/2);
 		zoneId=row*5+col;
-		//System.out.println("belongs to account:  vti_zone_"+zoneId+"   (row="+row+",col="+col+")");
+		//Log.println("belongs to account:  vti_zone_"+zoneId+"   (row="+row+",col="+col+")");
 		if(zoneId<25&&zoneId>=0)
 			if(zoneId<10) return "vti_zone_0"+zoneId;
 			else return "vti_zone_"+zoneId;
@@ -71,13 +71,13 @@ public class GeocodeAdapter {
 				address=doc.select("result > formatted_address").first().text().split(",")[0];
 				//e=doc.select("result > address_component > type:matches(street_number)").first();
 				//if(e!=null) streetNumber=e.parents().first().select("long_name").text();
-				//System.out.println(streetName+" "+streetNumber);
+				//Log.println(streetName+" "+streetNumber);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		//System.out.println("WITHIN GeocodeAdapter.reverseGeocode: "+ url);
-		//System.out.println("WITHIN GeocodeAdapter.reverseGeocode: "+address);
+		//Log.println("WITHIN GeocodeAdapter.reverseGeocode: "+ url);
+		//Log.println("WITHIN GeocodeAdapter.reverseGeocode: "+address);
 		return address;
 	}
 	
@@ -87,14 +87,14 @@ public class GeocodeAdapter {
 		double SOUTH, WEST;
 	    SOUTH=southwest.getLatitude();
 		WEST=southwest.getLongitude();
-		System.out.println("SOUTH="+SOUTH);
-		System.out.println("NORTH="+geocode(buildQueryAddress(NORTH)).getLatitude());
-		System.out.println("WEST="+WEST);
-		System.out.println("EAST="+geocode(buildQueryAddress(EAST)).getLongitude());
+		Log.println("SOUTH="+SOUTH);
+		Log.println("NORTH="+geocode(buildQueryAddress(NORTH)).getLatitude());
+		Log.println("WEST="+WEST);
+		Log.println("EAST="+geocode(buildQueryAddress(EAST)).getLongitude());
 		
 		//ZONE_LATITUDE=(((geocode(buildQueryAddress(NORTH)).getLatitude())*1.0E6)-(southwest.getLatitude()*1.0E6))/ZONE_NUM;
 		//ZONE_LONGITUDE=(((geocode(buildQueryAddress(EAST)).getLongitude())*1.0E6)-(southwest.getLongitude()*1.0E6))/ZONE_NUM;
-		//System.out.println(ZONE_LATITUDE+"  "+ZONE_LONGITUDE);
+		//Log.println(ZONE_LATITUDE+"  "+ZONE_LONGITUDE);
 		//*/
 	}
 	

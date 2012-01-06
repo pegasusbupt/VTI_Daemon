@@ -12,15 +12,15 @@ public class RateMultiServer extends Thread{
 	
 	public static void main(String[] args){
 		new RateMultiServer().start();
-		//System.out.println(PORT);
+		//Log.println(PORT);
 	}
 	
 	public RateMultiServer(){
 		try {
 			server = new ServerSocket(PORT);
-			//System.out.println(server.getLocalPort());
-			//System.out.println(server.getInetAddress());
-			System.out.println(server.getLocalSocketAddress());
+			//Log.println(server.getLocalPort());
+			//Log.println(server.getInetAddress());
+			Log.println(server.getLocalSocketAddress().toString());
 		} catch (IOException e) {
 			System.err.println("Could not listen on port: "+PORT);
 		}

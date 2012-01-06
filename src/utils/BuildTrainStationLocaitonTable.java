@@ -50,7 +50,7 @@ public class BuildTrainStationLocaitonTable {
 			PreparedStatement prep=VTI.conn.prepareStatement("insert into train_station values (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 			while(sc.hasNextLine()){
 				String[] fields=sc.nextLine().split(",");
-				//System.out.println(fields);
+				//Log.println(fields);
 				//table train_station 's schema: STATION_ID,LONGNAME,LINES,ADDRESS,X, Y, ADA,PKNRD,GTFS 
 				prep.setInt(1, Integer.parseInt(fields[0]));
 				prep.setString(2, fields[1]);
@@ -93,11 +93,11 @@ public class BuildTrainStationLocaitonTable {
 			while(it.hasNext()){
 				Element ele=(Element)it.next();
 				String desc=ele.element("description").getText();
-				//System.out.println(getStationId(desc));
-				//System.out.println(ele.element("Point").element("coordinates").getText());
+				//Log.println(getStationId(desc));
+				//Log.println(ele.element("Point").element("coordinates").getText());
 				coordinates.put(getStationId(desc), ele.element("Point").element("coordinates").getText().trim());
 			}
-			//System.out.println(coordinates.size());
+			//Log.println(coordinates.size());
 		
 			PreparedStatement prep=VTI.conn.prepareStatement("UPDATE train_station SET x=?, y=? where station_id=?;");
 			for(String s: coordinates.keySet()){
@@ -116,7 +116,7 @@ public class BuildTrainStationLocaitonTable {
 	private String getStationId(String desc){
 		//a ugly/awkward way to find out the station_id from the xml file
 		String [] parti=desc.split("<td>STATION ID</td>\n\n<td>");
-		//System.out.println(parti[0]);
+		//Log.println(parti[0]);
 		return parti[1].substring(0,parti[1].indexOf('<'));
 	}
 }

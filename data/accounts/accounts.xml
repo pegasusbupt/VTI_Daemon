@@ -4,7 +4,7 @@
   <account>
     <name>vti_zone_00</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.807735</lat>
       <lng>-87.72396</lng>
@@ -13,12 +13,11 @@
       <lat>41.822426</lat>
       <lng>-87.712524</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_01</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.807735</lat>
       <lng>-87.712524</lng>
@@ -27,12 +26,11 @@
       <lat>41.822426</lat>
       <lng>-87.70109</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_02</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.807735</lat>
       <lng>-87.70109</lng>
@@ -41,12 +39,11 @@
       <lat>41.822426</lat>
       <lng>-87.68966</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_03</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.807735</lat>
       <lng>-87.68966</lng>
@@ -55,12 +52,11 @@
       <lat>41.822426</lat>
       <lng>-87.67822</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_04</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.807735</lat>
       <lng>-87.67822</lng>
@@ -69,12 +65,11 @@
       <lat>41.822426</lat>
       <lng>-87.66679</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_05</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.822426</lat>
       <lng>-87.72396</lng>
@@ -83,12 +78,11 @@
       <lat>41.837112</lat>
       <lng>-87.712524</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_06</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.822426</lat>
       <lng>-87.712524</lng>
@@ -97,12 +91,11 @@
       <lat>41.837112</lat>
       <lng>-87.70109</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_07</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.822426</lat>
       <lng>-87.70109</lng>
@@ -111,12 +104,11 @@
       <lat>41.837112</lat>
       <lng>-87.68966</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_08</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.822426</lat>
       <lng>-87.68966</lng>
@@ -125,12 +117,11 @@
       <lat>41.837112</lat>
       <lng>-87.67822</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_09</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.822426</lat>
       <lng>-87.67822</lng>
@@ -139,12 +130,11 @@
       <lat>41.837112</lat>
       <lng>-87.66679</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_10</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.837112</lat>
       <lng>-87.72396</lng>
@@ -153,12 +143,11 @@
       <lat>41.851803</lat>
       <lng>-87.712524</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_11</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.837112</lat>
       <lng>-87.712524</lng>
@@ -167,12 +156,11 @@
       <lat>41.851803</lat>
       <lng>-87.70109</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_12</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.837112</lat>
       <lng>-87.70109</lng>
@@ -181,12 +169,11 @@
       <lat>41.851803</lat>
       <lng>-87.68966</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_13</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.837112</lat>
       <lng>-87.68966</lng>
@@ -195,12 +182,11 @@
       <lat>41.851803</lat>
       <lng>-87.67822</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_14</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.837112</lat>
       <lng>-87.67822</lng>
@@ -209,12 +195,11 @@
       <lat>41.851803</lat>
       <lng>-87.66679</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_15</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.851803</lat>
       <lng>-87.72396</lng>
@@ -223,12 +208,11 @@
       <lat>41.86649</lat>
       <lng>-87.712524</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_16</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.851803</lat>
       <lng>-87.712524</lng>
@@ -237,12 +221,11 @@
       <lat>41.86649</lat>
       <lng>-87.70109</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_17</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.851803</lat>
       <lng>-87.70109</lng>
@@ -251,12 +234,11 @@
       <lat>41.86649</lat>
       <lng>-87.68966</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_18</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.851803</lat>
       <lng>-87.68966</lng>
@@ -265,12 +247,11 @@
       <lat>41.86649</lat>
       <lng>-87.67822</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_19</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.851803</lat>
       <lng>-87.67822</lng>
@@ -279,12 +260,11 @@
       <lat>41.86649</lat>
       <lng>-87.66679</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_20</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.86649</lat>
       <lng>-87.72396</lng>
@@ -293,12 +273,11 @@
       <lat>41.881176</lat>
       <lng>-87.712524</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_21</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.86649</lat>
       <lng>-87.712524</lng>
@@ -307,12 +286,11 @@
       <lat>41.881176</lat>
       <lng>-87.70109</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_22</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.86649</lat>
       <lng>-87.70109</lng>
@@ -321,12 +299,11 @@
       <lat>41.881176</lat>
       <lng>-87.68966</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_23</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.86649</lat>
       <lng>-87.68966</lng>
@@ -335,12 +312,11 @@
       <lat>41.881176</lat>
       <lng>-87.67822</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_zone_24</name>
     <type>zone</type>
-    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates.</description>
+    <description>This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.</description>
     <southwest>
       <lat>41.86649</lat>
       <lng>-87.67822</lng>
@@ -349,7 +325,6 @@
       <lat>41.881176</lat>
       <lng>-87.66679</lng>
     </northeast>
-    <area>2 miles * 2 miles</area>
   </account>
   <account>
     <name>vti_yellowline</name>

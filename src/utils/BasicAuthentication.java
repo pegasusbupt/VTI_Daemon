@@ -17,7 +17,7 @@ public class BasicAuthentication {
 		.build();
 		Twitter twitter = new TwitterFactory(config).getInstance(new BasicAuthorization("vti_robot", "vti&&vti"));
 		AccessToken token = twitter.getOAuthAccessToken();
-		System.out.println("token = "+token.getToken());
-		System.out.println("tokenSecret = "+token.getTokenSecret());
+		Log.println("token = "+token.getToken());
+		Log.println("tokenSecret = "+token.getTokenSecret());
 	}
 }
