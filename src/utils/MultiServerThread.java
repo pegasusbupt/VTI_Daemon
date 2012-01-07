@@ -29,8 +29,8 @@ public class MultiServerThread extends Thread {
 			String input = in.readLine();
 			PreparedStatement stat;
 			StringBuilder feedback=new StringBuilder();
-			System.err.println(input);
-			if (input != null) {
+			Log.println(input);
+			while (input != null){
 				// a message starts with "Feedback" is a feedback message 
 				if(input.startsWith("Feedback")){
 					stat = VTI.conn.prepareStatement("insert into feedback values (?, ?, now());");
@@ -63,9 +63,11 @@ public class MultiServerThread extends Thread {
 						stat.close();
 					}
 				}
-				in.close();
-				socket.close();
+				input = in.readLine();
+				Log.println(input);
 			}
+			in.close();
+			socket.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

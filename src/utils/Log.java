@@ -1,7 +1,7 @@
 package utils;
 
 public class Log {
-	private final static boolean LOG = false;
+	private final static boolean LOG = true;
 	
 	public static void print(String msg){
 		if(LOG)
