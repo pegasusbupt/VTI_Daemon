@@ -6,16 +6,16 @@ package utils;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class RateMultiServer extends Thread{
+public class MultiServer extends Thread{
 	public final static int PORT='V'+'T'+'I';
 	private ServerSocket server;
 	
 	public static void main(String[] args){
-		new RateMultiServer().start();
+		new MultiServer().start();
 		//Log.println(PORT);
 	}
 	
-	public RateMultiServer(){
+	public MultiServer(){
 		try {
 			server = new ServerSocket(PORT);
 			//Log.println(server.getLocalPort());
@@ -29,7 +29,7 @@ public class RateMultiServer extends Thread{
 	public void run(){
 		while (true)
 			try {
-				new RateMultiServerThread(server.accept()).start();
+				new MultiServerThread(server.accept()).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

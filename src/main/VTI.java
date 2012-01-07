@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import utils.FeedReader;
 import utils.Log;
-import utils.RateMultiServer;
+import utils.MultiServer;
 import account.MasterVTIAccount;
 import account.TrainRouteVTIAccount;
 import account.VTIAccount;
@@ -47,7 +47,7 @@ public class VTI {
 		}
         
 		//start the rate multiserver service 
-		new RateMultiServer().start();
+		new MultiServer().start();
 		addTrainRoutesAccounts();
 		addMasterAccount();
 		addZoneAccount();

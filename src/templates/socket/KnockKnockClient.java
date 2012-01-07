@@ -1,4 +1,5 @@
 package templates.socket;
+
 /*
  * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
  *
@@ -28,7 +29,7 @@ package templates.socket;
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
+ */
 
 import java.io.*;
 import java.net.*;
@@ -36,43 +37,46 @@ import java.net.*;
 import utils.Log;
 
 public class KnockKnockClient {
-    public static void main(String[] args) throws IOException {
-        final String server="localhost";
-        Socket kkSocket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
+	public static void main(String[] args) throws IOException {
+		final String server = "localhost";
+		Socket kkSocket = null;
+		PrintWriter out = null;
+		BufferedReader in = null;
 
-        try {
-            kkSocket = new Socket(server, 4444);
-            out = new PrintWriter(kkSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: "+ server+" .");
-         //   System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: "+ server+ " .");
-            //System.exit(1);
-        }
+		try {
+			kkSocket = new Socket(server, 4444);
+			out = new PrintWriter(kkSocket.getOutputStream(), true);
+			in = new BufferedReader(new InputStreamReader(
+					kkSocket.getInputStream()));
+		} catch (UnknownHostException e) {
+			System.err.println("Don't know about host: " + server + " .");
+			// System.exit(1);
+		} catch (IOException e) {
+			System.err.println("Couldn't get I/O for the connection to: "
+					+ server + " .");
+			// System.exit(1);
+		}
 
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String fromServer=stdIn.readLine();
-        String fromUser;
+		BufferedReader stdIn = new BufferedReader(new InputStreamReader(
+				System.in));
+		String fromServer = stdIn.readLine();
+		String fromUser;
 
-        while (fromServer != null) {
-        	Log.println("Server: " + fromServer);
-            if (fromServer.equals("Bye."))
-                break;
-		    
-            fromUser = stdIn.readLine();
-	    if (fromUser != null) {
-	    	Log.println("Client: " + fromUser);
-                out.println(fromUser);
-	    }
-        }
+		while (fromServer != null) {
+			Log.println("Server: " + fromServer);
+			if (fromServer.equals("Bye."))
+				break;
 
-        out.close();
-        in.close();
-        stdIn.close();
-        kkSocket.close();
-    }
+			fromUser = stdIn.readLine();
+			if (fromUser != null) {
+				Log.println("Client: " + fromUser);
+				out.println(fromUser);
+			}
+		}
+
+		out.close();
+		in.close();
+		stdIn.close();
+		kkSocket.close();
+	}
 }

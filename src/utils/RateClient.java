@@ -48,7 +48,7 @@ public class RateClient {
         SocketAddress sockaddr=null;
 		try {
 			addr = InetAddress.getByName(server);
-	        sockaddr = new InetSocketAddress(addr, RateMultiServer.PORT);
+	        sockaddr = new InetSocketAddress(addr, MultiServer.PORT);
 	        // Create an unbound socket
 	   
 	        
