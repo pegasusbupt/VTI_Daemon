@@ -43,7 +43,7 @@ public class CreateAccountXML {
 	public static void createAccountXML(){
 		final String trainRouteAccDesc="This account posts scheduled alerts related to the associated train route. Data is fetched from CTA RSS feeds in real-time.";
 		final String zoneArea="2 miles * 2 miles";
-		final String zoneAccDesc="This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 4 square miles area.";
+		final String zoneAccDesc="This account posts user generated publications that are reported within the area defined by its associated coordinates. Currently each zone covers a 2 mile * 2 mile square area.";
 		String file = "data\\accounts\\accounts.xml";
 		Document doc = DocumentFactory.getInstance().createDocument();
 		Element root = doc.addElement("accounts");
