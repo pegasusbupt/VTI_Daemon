@@ -55,8 +55,8 @@ public class MultiServerThread extends Thread {
 						String[] fields = input.split(",");
 						int len=fields.length;
 						//update ratings table 
-						if(!fields[4].equals("not available")){
-							String[] coord=fields[4].split(":");
+						if(!fields[3].equals("not available")){
+							String[] coord=fields[3].split(":");
 							stat=VTI.conn.prepareStatement("INSERT INTO ratings(p_id, rater, tweet, rate, rate_lat, rate_lng, rate_time) VALUES (?, ?, ?, ?, ?, ?, now());");
 							stat.setDouble(5, Double.parseDouble(coord[0]));
 							stat.setDouble(6, Double.parseDouble(coord[1]));
