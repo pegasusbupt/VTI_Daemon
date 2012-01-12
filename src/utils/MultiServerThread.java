@@ -51,13 +51,31 @@ public class MultiServerThread extends Thread {
 						stat.close();
 						out.close();
 					}else{
-						// the message is vote info. and has a format "p_id+rater_name+up/down"
+						// the message is vote info. and has a format "p_msg+rater_name+up/down+location+p_id"
 						String[] fields = input.split(",");
-						//System.err.println(input);
-						if (fields[2].equalsIgnoreCase("up"))
+						int len=fields.length;
+						//update ratings table 
+						if(!fields[4].equals("not available")){
+							String[] coord=fields[4].split(":");
+							stat=VTI.conn.prepareStatement("INSERT INTO ratings(p_id, rater, tweet, rate, rate_lat, rate_lng, rate_time) VALUES (?, ?, ?, ?, ?, ?, now());");
+							stat.setDouble(5, Double.parseDouble(coord[0]));
+							stat.setDouble(6, Double.parseDouble(coord[1]));
+						}else{
+							stat=VTI.conn.prepareStatement("INSERT INTO ratings(p_id, rater, tweet, rate, rate_time) VALUES (?, ?, ?, ?, now());");
+						}
+						stat.setLong(1, Long.parseLong(fields[len-1]));
+						stat.setString(2, fields[1]);
+						stat.setString(3, fields[0]);
+						stat.setString(4, fields[2]);
+						stat.executeUpdate();
+						
+						// update publication table
+						if (fields[2].equalsIgnoreCase("up")){
 							stat = VTI.conn.prepareStatement("UPDATE publications SET up_votes=up_votes+1 where geotagged_text=?;");
-						else
+						}
+						else{
 							stat = VTI.conn.prepareStatement("UPDATE publications SET down_votes=down_votes+1 where geotagged_text=?;");
+						}
 						stat.setString(1, fields[0]);
 						stat.executeUpdate();
 						stat.close();
