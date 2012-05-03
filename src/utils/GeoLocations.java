@@ -19,7 +19,6 @@ public class GeoLocations {
 	public static void main(String[] args){
 		Log.println(distBetween(-87.776785, 41.870886,-87.774135 , 41.887293));
 		Log.println(distBetween(-87.776785, 41.870886,-87.783661, 41.887159));
-	
 	}
 	
 	/*
